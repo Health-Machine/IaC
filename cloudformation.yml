@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Health Machine
+
+Parameters:
+  KeyName:
+    Description: Nome do par de chaves SSH existente
+    Type: String
+
+Resources:
+  NameVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: NameVpc
+
+  NameSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref NameVpc
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      Tags:
+        - Key: Name
+          Value: NameSubnet
+
+  NameInternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref NameVpc
+      InternetGatewayId: !Ref NameInternetGateway
+
+  NameRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref NameVpc
+
+  DefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref NameRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref NameInternetGateway
+
+  RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref NameSubnet
+      RouteTableId: !Ref NameRouteTable
+
+  NameSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Acessos SSH
+      VpcId: !Ref NameVpc
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+  NameEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      ImageId: ami-0c02fb55956c7d316 # Amazon Linux 2 - us-east-1
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: !Ref NameSubnet
+          GroupSet:
+            - !Ref NameSecurityGroup
+      Tags:
+        - Key: Name
+          Value: NameEC2
+
+Outputs:
+  InstancePublicIP:
+    Description: IP público da instância EC2
+    Value: !GetAtt NameEC2.PublicIp
