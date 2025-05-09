@@ -1,0 +1,34 @@
+[
+  {
+    "ParameterKey": "Client",
+    "ParameterValue": "health-machine"
+  },
+  {
+    "ParameterKey": "VpcCidr",
+    "ParameterValue": "10.100.0.0/24"
+  },
+  {
+    "ParameterKey": "VpcPublicSubnetCidr",
+    "ParameterValue": "10.100.0.0/24"
+  },
+  {
+    "ParameterKey": "VpcPublicSubnetZone",
+    "ParameterValue": "us-east-1a"
+  },
+  {
+    "ParameterKey": "Ec2KeyPairName",
+    "ParameterValue": "health-machine"
+  },
+  {
+    "ParameterKey": "Ec2AmiId",
+    "ParameterValue": "ami-0f9fc25dd2506cf6d"
+  },
+  {
+    "ParameterKey": "Ec2IamInstanceProfile",
+    "ParameterValue": "EMR_EC2_DefaultRole"
+  },
+  {
+    "ParameterKey": "Ec2JupyterPassword",
+    "ParameterValue": "urubu100"
+  }
+]
