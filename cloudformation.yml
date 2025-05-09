@@ -175,7 +175,7 @@ Resources:
           mkdir /opt/jupyter/script
           touch /opt/jupyter/script/start.sh
           echo '#!/bin/bash' >> /opt/jupyter/script/start.sh
-          echo '/usr/bin/python3 -m notebook --NotebookApp.notebook_dir=/opt/jupyter/notebook --NotebookApp.password=$(/usr/bin/python3 -c "from notebook.auth import passwd; print(passwd(\"urubu100\"))")  --allow-root --ip 0.0.0.0 --port 80' >> /opt/jupyter/script/start.sh
+          echo '/usr/bin/python3 -m notebook --NotebookApp.notebook_dir=/opt/jupyter/notebook --NotebookApp.password=$(/usr/bin/python3 -c "from notebook.auth import passwd; print(passwd(\"${Ec2JupyterPassword}\"))")  --allow-root --ip 0.0.0.0 --port 80' >> /opt/jupyter/script/start.sh
           chmod +x /opt/jupyter/script/start.sh
           systemctl daemon-reload
           systemctl start jupyter
@@ -186,24 +186,83 @@ Resources:
         - Key: Name
           Value: !Sub ${AWS::StackName}-${Client}
 
-  RawBucket:
-    Type: AWS::S3::Bucket
+  # RawBucket:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "raw-bucket-health-machine"
+  #     Tags:
+  #       - Key: Name
+  #         Value: RawBucket
+  # TrustedBucket:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "trusted-bucket-health-machine"
+  #     Tags:
+  #       - Key: Name
+  #         Value: TrustedBucket
+  # ClientBucket:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "client-bucket-health-machine"
+  #     Tags:
+  #       - Key: Name
+  #         Value: ClientBucket
+
+  RestApiUploadS3:
+    Type: AWS::ApiGateway::RestApi
     Properties:
-      BucketName: !Sub "raw-bucket"
-      Tags:
-        - Key: Name
-          Value: RawBucket
-  TrustedBucket:
-    Type: AWS::S3::Bucket
+      Name: "api-upload-s3"
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+      BinaryMediaTypes:
+        - application/json
+        - text/csv
+  ApiResourceBucket:
+    Type: AWS::ApiGateway::Resource
     Properties:
-      BucketName: !Sub "trusted-bucket"
-      Tags:
-        - Key: Name
-          Value: TrustedBucket
-  ClientBucket:
-    Type: AWS::S3::Bucket
+      ParentId: !GetAtt RestApiUploadS3.RootResourceId
+      PathPart: "{bucket}"
+      RestApiId: !Ref RestApiUploadS3
+  ApiResourceFileName:
+    Type: AWS::ApiGateway::Resource
     Properties:
-      BucketName: !Sub "client-bucket"
-      Tags:
-        - Key: Name
-          Value: ClientBucket
+      ParentId: !Ref ApiResourceBucket
+      PathPart: "{filename}"
+      RestApiId: !Ref RestApiUploadS3
+  ApiDeploymentHml:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: ApiPutMethod
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      StageName: hml
+  ApiPutMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      ResourceId: !Ref ApiResourceFileName
+      HttpMethod: PUT
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: PUT
+        Uri: !Sub
+          - arn:aws:apigateway:${Region}:s3:path/${BucketName}/{FileName}
+          - Region: !Ref AWS::Region
+            BucketName: !Ref ApiResourceBucket
+            FileName: !Ref ApiResourceFileName
+        Credentials: arn:aws:iam::381492149341:role/LabRole
+        RequestParameters:
+          integration.request.path.bucket: method.request.path.bucket
+          integration.request.path.filename: method.request.path.filename
+          integration.request.header.Content-Type: method.request.header.Content-Type
+        PassthroughBehavior: WHEN_NO_MATCH
+        ContentHandling: CONVERT_TO_BINARY
+        IntegrationResponses:
+          - StatusCode: 200
+      RequestParameters:
+        method.request.path.bucket: true
+        method.request.path.filename: true
+        method.request.header.Content-Type: true
+      MethodResponses:
+        - StatusCode: 200

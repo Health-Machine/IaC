@@ -1,30 +1,54 @@
-name: Deploy AWS
+name: Deploy CloudFormation Stack
+
+# on:
+#   push:
+#     branches:
+#       - main # 'master'
 
 on:
   pull_request:
-    types: [closed]
     branches:
       - main
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Checkout código
         uses: actions/checkout@v3
 
+      - name: Verificar acesso
+        run: echo "Verificando acesso"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+
       - name: Configurar credenciais AWS
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3.0.2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: us-east-1
 
-      - name: Fazer deploy do CloudFormation
+      - name: Colocar params.json no diretório correto
+        run: |
+          echo '[
+            {
+              "ParameterKey": "Ec2JupyterPassword",
+              "ParameterValue": "urubu100"
+            },
+            {
+              "ParameterKey": "Ec2KeyPairName",
+              "ParameterValue": "health-machine"
+            }
+          ]' > params.json
+
+      - name: Deploy CloudFormation
         run: |
           aws cloudformation deploy \
-            --template-file cloudformation.yml \
-            --stack-name DeployAWS \
-            --capabilities CAPABILITY_NAMED_IAM
+            --template-file cloudformation.yaml \
+            --stack-name HealthMachineStack \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --parameter-overrides file://params.json
