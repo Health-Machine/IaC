@@ -246,11 +246,7 @@ Resources:
       Integration:
         Type: AWS
         IntegrationHttpMethod: PUT
-        Uri: !Sub
-          - arn:aws:apigateway:${Region}:s3:path/${BucketName}/{FileName}
-          - Region: !Ref AWS::Region
-            BucketName: !Ref ApiResourceBucket
-            FileName: !Ref ApiResourceFileName
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/{bucket}/{filename}"
         Credentials: arn:aws:iam::381492149341:role/LabRole
         RequestParameters:
           integration.request.path.bucket: method.request.path.bucket
@@ -266,3 +262,20 @@ Resources:
         method.request.header.Content-Type: true
       MethodResponses:
         - StatusCode: 200
+  ApiDeploymentHml:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: ApiPutMethod
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+
+  ApiStage:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      StageName: hml
+      RestApiId: !Ref RestApiUploadS3
+      DeploymentId: !Ref ApiDeploymentHml
+      MethodSettings:
+        - ResourcePath: "/*"
+          HttpMethod: "*"
+          LoggingLevel: INFO
+          DataTraceEnabled: true
