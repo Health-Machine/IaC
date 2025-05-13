@@ -279,4 +279,3 @@ Resources:
           HttpMethod: "*"
           LoggingLevel: INFO
           DataTraceEnabled: true
-
