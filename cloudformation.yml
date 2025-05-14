@@ -274,8 +274,16 @@ Resources:
       StageName: hml
       RestApiId: !Ref RestApiUploadS3
       DeploymentId: !Ref ApiDeploymentHml
-      MethodSettings:
-        - ResourcePath: "/*"
-          HttpMethod: "*"
-          LoggingLevel: INFO
-          DataTraceEnabled: true
+      # MethodSettings:               -> logs detalhados caso precise
+      #   - ResourcePath: "/*"
+      #     HttpMethod: "*"
+      #     LoggingLevel: INFO
+      #     DataTraceEnabled: true
+      AccessLogSetting:
+        DestinationArn: !GetAtt ApiGatewayLogGroup.Arn
+        Format: "{\"requestId\":\"$context.requestId\",\"bucket\":\"$context.path.bucket\",\"filename\":\"$context.path.filename\",\"status\":\"$context.status\",\"message\":\"Upload successfully.\"}"
+  ApiGatewayLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/apigateway/upload-s3-log
+      RetentionInDays: 7
