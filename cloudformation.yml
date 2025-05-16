@@ -232,10 +232,13 @@ Resources:
       RestApiId: !Ref RestApiUploadS3
   ApiDeploymentHml:
     Type: AWS::ApiGateway::Deployment
-    DependsOn: ApiPutMethod
+    DependsOn:
+      - ApiPutMethod
+      - ApiGetMethod
     Properties:
       RestApiId: !Ref RestApiUploadS3
       StageName: hml
+
   ApiPutMethod:
     Type: AWS::ApiGateway::Method
     Properties:
@@ -262,9 +265,25 @@ Resources:
         method.request.header.Content-Type: true
       MethodResponses:
         - StatusCode: 200
+
+  ApiGetMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      ResourceId: !Ref ApiResourceFileName
+      HttpMethod: GET
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: GET
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/download-csv"
+        Credentials: arn:aws:iam::381492149341:role/LabRole
+
   ApiDeploymentHml:
     Type: AWS::ApiGateway::Deployment
-    DependsOn: ApiPutMethod
+    DependsOn:
+      - ApiPutMethod
+      - ApiGetMethod
     Properties:
       RestApiId: !Ref RestApiUploadS3
 
