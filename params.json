@@ -30,5 +30,9 @@
   {
     "ParameterKey": "Ec2JupyterPassword",
     "ParameterValue": "urubu100"
+  },
+  {
+    "ParameterKey": "NomeBucketRAW",
+    "ParameterValue": "raw-bucket-381492149341"
   }
 ]
