@@ -34,5 +34,9 @@
   {
     "ParameterKey": "NomeBucketRAW",
     "ParameterValue": "raw-bucket-381492149341"
+  },
+  {
+    "ParameterKey": "SetupBucket",
+    "ParameterValue": "setup-bucket-381492149341"
   }
 ]
