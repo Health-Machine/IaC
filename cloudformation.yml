@@ -72,9 +72,9 @@ Parameters:
     Type: String
     NoEcho: true
     Description: A senha de acesso ao jupyter
-  NomeBucketRAW:
+  SetupBucket:
     Type: String
-    Description: Nome do Bucket RAW
+    Description: Nome do Bucket de Setup
 
 Resources:
   Vpc:
@@ -188,28 +188,6 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${AWS::StackName}-${Client}
-
-  # RawBucket:
-  #   Type: AWS::S3::Bucket
-  #   Properties:
-  #     BucketName: !Sub "raw-bucket-health-machine"
-  #     Tags:
-  #       - Key: Name
-  #         Value: RawBucket
-  # TrustedBucket:
-  #   Type: AWS::S3::Bucket
-  #   Properties:
-  #     BucketName: !Sub "trusted-bucket-health-machine"
-  #     Tags:
-  #       - Key: Name
-  #         Value: TrustedBucket
-  # ClientBucket:
-  #   Type: AWS::S3::Bucket
-  #   Properties:
-  #     BucketName: !Sub "client-bucket-health-machine"
-  #     Tags:
-  #       - Key: Name
-  #         Value: ClientBucket
 
   RestApiUploadS3:
     Type: AWS::ApiGateway::RestApi
@@ -327,7 +305,7 @@ Resources:
       Runtime: python3.11
       Handler: get_latest_csv.lambda_handler
       Code:
-        S3Bucket: !Ref NomeBucketRAW
+        S3Bucket: !Ref SetupBucket
         S3Key: get_latest_csv.zip
       Timeout: 10
       MemorySize: 128
@@ -340,3 +318,75 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${RestApiUploadS3}/*/GET/{bucket}/download-csv
+
+  FunctionRawToTrusted:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: trigger_raw_to_trusted
+      Runtime: python3.11
+      Handler: trigger_raw_to_trusted.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: trigger_raw_to_trusted.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: arn:aws:iam::381492149341:role/LabRole  
+  LambdaInvokePermissionS3Raw:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FunctionRawToTrusted
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub arn:aws:s3:::raw-bucket-381492149341
+  
+  FunctionTrustedToClient:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: trigger_trusted_to_client
+      Runtime: python3.11
+      Handler: trigger_trusted_to_client.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: trigger_trusted_to_client.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: arn:aws:iam::381492149341:role/LabRole  
+  LambdaInvokePermissionS3Trusted:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FunctionTrustedToClient
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub arn:aws:s3:::trusted-bucket-381492149341
+
+  RawBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Raw
+    Properties:
+      BucketName: !Sub "raw-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: RawBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionRawToTrusted.Arn
+  TrustedBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Trusted
+    Properties:
+      BucketName: !Sub "trusted-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: TrustedBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionTrustedToClient.Arn
+  ClientBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "client-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: ClientBucket
