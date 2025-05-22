@@ -2,7 +2,24 @@
 
 Este repositório contém os arquivos necessários para criar e gerenciar recursos na AWS usando CloudFormation.
 
-### Rodar a Stack
+### Rodar a Stack Setup (setup.yml)
+
+Para criar o Bucket que armazena as funções Lambdas:
+
+```bash
+aws cloudformation deploy `
+   --template-file "setup.yml" `
+   --stack-name "SetupHealthMachineStack" `
+   --capabilities "CAPABILITY_NAMED_IAM" `
+```
+
+### Subir os arquivos no Bucket
+
+```bash
+aws s3 cp ./lambda s3://setup-bucket-381492149341/ --recursive
+```
+
+### Rodar a Stack Principal (cloudformation.yml)
 
 Para criar ou atualizar a stack, execute o seguinte comando no terminal:
 
