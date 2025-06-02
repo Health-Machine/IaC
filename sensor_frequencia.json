@@ -1,0 +1,5327 @@
+[
+  {
+    "fk_sensor": 6,
+    "valor": 59.41,
+    "data_captura": "04/05/2025 16:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.65,
+    "data_captura": "04/05/2025 16:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.69,
+    "data_captura": "04/05/2025 16:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.14,
+    "data_captura": "04/05/2025 16:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.68,
+    "data_captura": "04/05/2025 16:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.18,
+    "data_captura": "04/05/2025 16:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.51,
+    "data_captura": "04/05/2025 16:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.38,
+    "data_captura": "04/05/2025 16:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.91,
+    "data_captura": "04/05/2025 16:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.93,
+    "data_captura": "04/05/2025 16:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.41,
+    "data_captura": "04/05/2025 16:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.28,
+    "data_captura": "04/05/2025 16:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.06,
+    "data_captura": "04/05/2025 16:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.85,
+    "data_captura": "04/05/2025 16:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.26,
+    "data_captura": "04/05/2025 16:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.3,
+    "data_captura": "04/05/2025 16:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.29,
+    "data_captura": "04/05/2025 16:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.3,
+    "data_captura": "04/05/2025 17:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.43,
+    "data_captura": "04/05/2025 17:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.42,
+    "data_captura": "04/05/2025 17:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.75,
+    "data_captura": "04/05/2025 17:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.68,
+    "data_captura": "04/05/2025 17:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.85,
+    "data_captura": "04/05/2025 17:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.91,
+    "data_captura": "04/05/2025 17:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.83,
+    "data_captura": "04/05/2025 17:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.34,
+    "data_captura": "04/05/2025 17:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.74,
+    "data_captura": "04/05/2025 17:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.95,
+    "data_captura": "04/05/2025 17:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.29,
+    "data_captura": "04/05/2025 17:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.46,
+    "data_captura": "04/05/2025 17:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.44,
+    "data_captura": "04/05/2025 17:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.6,
+    "data_captura": "04/05/2025 17:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.84,
+    "data_captura": "04/05/2025 17:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.03,
+    "data_captura": "04/05/2025 17:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.78,
+    "data_captura": "04/05/2025 17:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.63,
+    "data_captura": "04/05/2025 17:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.03,
+    "data_captura": "04/05/2025 17:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.43,
+    "data_captura": "04/05/2025 17:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.35,
+    "data_captura": "04/05/2025 17:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.16,
+    "data_captura": "04/05/2025 17:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.27,
+    "data_captura": "04/05/2025 17:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.48,
+    "data_captura": "04/05/2025 17:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.9,
+    "data_captura": "04/05/2025 17:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.17,
+    "data_captura": "04/05/2025 17:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.94,
+    "data_captura": "04/05/2025 17:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.4,
+    "data_captura": "04/05/2025 17:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.64,
+    "data_captura": "04/05/2025 17:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.87,
+    "data_captura": "04/05/2025 17:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.96,
+    "data_captura": "04/05/2025 17:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.33,
+    "data_captura": "04/05/2025 17:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.52,
+    "data_captura": "04/05/2025 17:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.28,
+    "data_captura": "04/05/2025 17:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.23,
+    "data_captura": "04/05/2025 17:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.15,
+    "data_captura": "04/05/2025 17:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.67,
+    "data_captura": "04/05/2025 17:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.63,
+    "data_captura": "04/05/2025 17:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.96,
+    "data_captura": "04/05/2025 17:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.98,
+    "data_captura": "04/05/2025 17:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.8,
+    "data_captura": "04/05/2025 17:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.41,
+    "data_captura": "04/05/2025 17:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.88,
+    "data_captura": "04/05/2025 17:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.1,
+    "data_captura": "04/05/2025 17:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.24,
+    "data_captura": "04/05/2025 17:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.69,
+    "data_captura": "04/05/2025 17:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.28,
+    "data_captura": "04/05/2025 17:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.28,
+    "data_captura": "04/05/2025 17:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.84,
+    "data_captura": "04/05/2025 17:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.81,
+    "data_captura": "04/05/2025 17:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.92,
+    "data_captura": "04/05/2025 17:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.83,
+    "data_captura": "04/05/2025 17:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.77,
+    "data_captura": "04/05/2025 17:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.27,
+    "data_captura": "04/05/2025 17:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.21,
+    "data_captura": "04/05/2025 17:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.47,
+    "data_captura": "04/05/2025 17:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.54,
+    "data_captura": "04/05/2025 17:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.81,
+    "data_captura": "04/05/2025 17:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.37,
+    "data_captura": "04/05/2025 17:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.49,
+    "data_captura": "04/05/2025 18:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.36,
+    "data_captura": "04/05/2025 18:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.84,
+    "data_captura": "04/05/2025 18:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.2,
+    "data_captura": "04/05/2025 18:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.73,
+    "data_captura": "04/05/2025 18:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.84,
+    "data_captura": "04/05/2025 18:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.08,
+    "data_captura": "04/05/2025 18:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.59,
+    "data_captura": "04/05/2025 18:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.73,
+    "data_captura": "04/05/2025 18:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.01,
+    "data_captura": "04/05/2025 18:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.05,
+    "data_captura": "04/05/2025 18:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.15,
+    "data_captura": "04/05/2025 18:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.27,
+    "data_captura": "04/05/2025 18:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.94,
+    "data_captura": "04/05/2025 18:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.78,
+    "data_captura": "04/05/2025 18:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56,
+    "data_captura": "04/05/2025 18:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.8,
+    "data_captura": "04/05/2025 18:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.88,
+    "data_captura": "04/05/2025 18:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.05,
+    "data_captura": "04/05/2025 18:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.53,
+    "data_captura": "04/05/2025 18:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.12,
+    "data_captura": "04/05/2025 18:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.15,
+    "data_captura": "04/05/2025 18:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.89,
+    "data_captura": "04/05/2025 18:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.85,
+    "data_captura": "04/05/2025 18:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.04,
+    "data_captura": "04/05/2025 18:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.52,
+    "data_captura": "04/05/2025 18:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.38,
+    "data_captura": "04/05/2025 18:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.69,
+    "data_captura": "04/05/2025 18:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.46,
+    "data_captura": "04/05/2025 18:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.37,
+    "data_captura": "04/05/2025 18:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.65,
+    "data_captura": "04/05/2025 18:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.95,
+    "data_captura": "04/05/2025 18:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.67,
+    "data_captura": "04/05/2025 18:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.88,
+    "data_captura": "04/05/2025 18:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.13,
+    "data_captura": "04/05/2025 18:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.68,
+    "data_captura": "04/05/2025 18:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.23,
+    "data_captura": "04/05/2025 18:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.37,
+    "data_captura": "04/05/2025 18:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.32,
+    "data_captura": "04/05/2025 18:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.29,
+    "data_captura": "04/05/2025 18:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.27,
+    "data_captura": "04/05/2025 18:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.17,
+    "data_captura": "04/05/2025 18:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.56,
+    "data_captura": "04/05/2025 18:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.97,
+    "data_captura": "04/05/2025 18:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.72,
+    "data_captura": "04/05/2025 18:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.55,
+    "data_captura": "04/05/2025 18:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.96,
+    "data_captura": "04/05/2025 18:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.35,
+    "data_captura": "04/05/2025 18:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.22,
+    "data_captura": "04/05/2025 18:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.65,
+    "data_captura": "04/05/2025 18:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.5,
+    "data_captura": "04/05/2025 18:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.52,
+    "data_captura": "04/05/2025 18:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.42,
+    "data_captura": "04/05/2025 18:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.65,
+    "data_captura": "04/05/2025 18:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.75,
+    "data_captura": "04/05/2025 18:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.13,
+    "data_captura": "04/05/2025 18:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.96,
+    "data_captura": "04/05/2025 18:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.91,
+    "data_captura": "04/05/2025 18:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.99,
+    "data_captura": "04/05/2025 18:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.75,
+    "data_captura": "04/05/2025 18:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.56,
+    "data_captura": "04/05/2025 19:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.36,
+    "data_captura": "04/05/2025 19:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.05,
+    "data_captura": "04/05/2025 19:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57,
+    "data_captura": "04/05/2025 19:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.97,
+    "data_captura": "04/05/2025 19:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.21,
+    "data_captura": "04/05/2025 19:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.38,
+    "data_captura": "04/05/2025 19:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.66,
+    "data_captura": "04/05/2025 19:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.71,
+    "data_captura": "04/05/2025 19:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.18,
+    "data_captura": "04/05/2025 19:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.09,
+    "data_captura": "04/05/2025 19:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.96,
+    "data_captura": "04/05/2025 19:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.48,
+    "data_captura": "04/05/2025 19:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.24,
+    "data_captura": "04/05/2025 19:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.11,
+    "data_captura": "04/05/2025 19:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.55,
+    "data_captura": "04/05/2025 19:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.23,
+    "data_captura": "04/05/2025 19:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.59,
+    "data_captura": "04/05/2025 19:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.33,
+    "data_captura": "04/05/2025 19:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.09,
+    "data_captura": "04/05/2025 19:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.21,
+    "data_captura": "04/05/2025 19:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.44,
+    "data_captura": "04/05/2025 19:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.6,
+    "data_captura": "04/05/2025 19:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.37,
+    "data_captura": "04/05/2025 19:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.86,
+    "data_captura": "04/05/2025 19:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.03,
+    "data_captura": "04/05/2025 19:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.9,
+    "data_captura": "04/05/2025 19:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.82,
+    "data_captura": "04/05/2025 19:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.87,
+    "data_captura": "04/05/2025 19:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.43,
+    "data_captura": "04/05/2025 19:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.94,
+    "data_captura": "04/05/2025 19:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.26,
+    "data_captura": "04/05/2025 19:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.14,
+    "data_captura": "04/05/2025 19:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.68,
+    "data_captura": "04/05/2025 19:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.81,
+    "data_captura": "04/05/2025 19:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.41,
+    "data_captura": "04/05/2025 19:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.39,
+    "data_captura": "04/05/2025 19:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.85,
+    "data_captura": "04/05/2025 19:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.12,
+    "data_captura": "04/05/2025 19:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.73,
+    "data_captura": "04/05/2025 19:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.16,
+    "data_captura": "04/05/2025 19:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54,
+    "data_captura": "04/05/2025 19:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.08,
+    "data_captura": "04/05/2025 19:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.61,
+    "data_captura": "04/05/2025 19:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.94,
+    "data_captura": "04/05/2025 19:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.62,
+    "data_captura": "04/05/2025 19:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.98,
+    "data_captura": "04/05/2025 19:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.96,
+    "data_captura": "04/05/2025 19:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.86,
+    "data_captura": "04/05/2025 19:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.61,
+    "data_captura": "04/05/2025 19:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.54,
+    "data_captura": "04/05/2025 19:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.71,
+    "data_captura": "04/05/2025 19:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.69,
+    "data_captura": "04/05/2025 19:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.26,
+    "data_captura": "04/05/2025 19:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.36,
+    "data_captura": "04/05/2025 19:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.93,
+    "data_captura": "04/05/2025 19:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.14,
+    "data_captura": "04/05/2025 19:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.67,
+    "data_captura": "04/05/2025 19:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.75,
+    "data_captura": "04/05/2025 19:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.06,
+    "data_captura": "04/05/2025 19:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.83,
+    "data_captura": "04/05/2025 20:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.74,
+    "data_captura": "04/05/2025 20:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.15,
+    "data_captura": "04/05/2025 20:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.24,
+    "data_captura": "04/05/2025 20:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.5,
+    "data_captura": "04/05/2025 20:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.29,
+    "data_captura": "04/05/2025 20:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.46,
+    "data_captura": "04/05/2025 20:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.25,
+    "data_captura": "04/05/2025 20:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.14,
+    "data_captura": "04/05/2025 20:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.8,
+    "data_captura": "04/05/2025 20:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.79,
+    "data_captura": "04/05/2025 20:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.01,
+    "data_captura": "04/05/2025 20:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.87,
+    "data_captura": "04/05/2025 20:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.88,
+    "data_captura": "04/05/2025 20:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.64,
+    "data_captura": "04/05/2025 20:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.91,
+    "data_captura": "04/05/2025 20:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.41,
+    "data_captura": "04/05/2025 20:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.97,
+    "data_captura": "04/05/2025 20:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.27,
+    "data_captura": "04/05/2025 20:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.91,
+    "data_captura": "04/05/2025 20:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.55,
+    "data_captura": "04/05/2025 20:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.58,
+    "data_captura": "04/05/2025 20:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.39,
+    "data_captura": "04/05/2025 20:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.23,
+    "data_captura": "04/05/2025 20:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.39,
+    "data_captura": "04/05/2025 20:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.08,
+    "data_captura": "04/05/2025 20:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.11,
+    "data_captura": "04/05/2025 20:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.89,
+    "data_captura": "04/05/2025 20:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.29,
+    "data_captura": "04/05/2025 20:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.07,
+    "data_captura": "04/05/2025 20:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.3,
+    "data_captura": "04/05/2025 20:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.86,
+    "data_captura": "04/05/2025 20:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.11,
+    "data_captura": "04/05/2025 20:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.04,
+    "data_captura": "04/05/2025 20:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.55,
+    "data_captura": "04/05/2025 20:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.43,
+    "data_captura": "04/05/2025 20:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.08,
+    "data_captura": "04/05/2025 20:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.78,
+    "data_captura": "04/05/2025 20:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.18,
+    "data_captura": "04/05/2025 20:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.81,
+    "data_captura": "04/05/2025 20:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.7,
+    "data_captura": "04/05/2025 20:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.37,
+    "data_captura": "04/05/2025 20:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.39,
+    "data_captura": "04/05/2025 20:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.48,
+    "data_captura": "04/05/2025 20:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.7,
+    "data_captura": "04/05/2025 20:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.95,
+    "data_captura": "04/05/2025 20:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.5,
+    "data_captura": "04/05/2025 20:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.98,
+    "data_captura": "04/05/2025 20:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.84,
+    "data_captura": "04/05/2025 20:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 54.45,
+    "data_captura": "04/05/2025 20:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.21,
+    "data_captura": "04/05/2025 20:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.1,
+    "data_captura": "04/05/2025 20:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.71,
+    "data_captura": "04/05/2025 20:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.96,
+    "data_captura": "04/05/2025 20:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.94,
+    "data_captura": "04/05/2025 20:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.97,
+    "data_captura": "04/05/2025 20:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.94,
+    "data_captura": "04/05/2025 20:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.62,
+    "data_captura": "04/05/2025 20:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.51,
+    "data_captura": "04/05/2025 20:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.62,
+    "data_captura": "04/05/2025 20:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.27,
+    "data_captura": "04/05/2025 21:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.27,
+    "data_captura": "04/05/2025 21:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.64,
+    "data_captura": "04/05/2025 21:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.76,
+    "data_captura": "04/05/2025 21:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.17,
+    "data_captura": "04/05/2025 21:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.4,
+    "data_captura": "04/05/2025 21:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.25,
+    "data_captura": "04/05/2025 21:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.4,
+    "data_captura": "04/05/2025 21:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.77,
+    "data_captura": "04/05/2025 21:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.72,
+    "data_captura": "04/05/2025 21:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.65,
+    "data_captura": "04/05/2025 21:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.91,
+    "data_captura": "04/05/2025 21:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.28,
+    "data_captura": "04/05/2025 21:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.68,
+    "data_captura": "04/05/2025 21:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.85,
+    "data_captura": "04/05/2025 21:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.97,
+    "data_captura": "04/05/2025 21:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.48,
+    "data_captura": "04/05/2025 21:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.62,
+    "data_captura": "04/05/2025 21:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.95,
+    "data_captura": "04/05/2025 21:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.09,
+    "data_captura": "04/05/2025 21:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.49,
+    "data_captura": "04/05/2025 21:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.01,
+    "data_captura": "04/05/2025 21:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.51,
+    "data_captura": "04/05/2025 21:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.7,
+    "data_captura": "04/05/2025 21:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 53.12,
+    "data_captura": "04/05/2025 21:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.19,
+    "data_captura": "04/05/2025 21:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.74,
+    "data_captura": "04/05/2025 21:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.51,
+    "data_captura": "04/05/2025 21:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.05,
+    "data_captura": "04/05/2025 21:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.31,
+    "data_captura": "04/05/2025 21:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.7,
+    "data_captura": "04/05/2025 21:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.34,
+    "data_captura": "04/05/2025 21:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.94,
+    "data_captura": "04/05/2025 21:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.36,
+    "data_captura": "04/05/2025 21:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.28,
+    "data_captura": "04/05/2025 21:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.63,
+    "data_captura": "04/05/2025 21:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.36,
+    "data_captura": "04/05/2025 21:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.45,
+    "data_captura": "04/05/2025 21:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.42,
+    "data_captura": "04/05/2025 21:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.3,
+    "data_captura": "04/05/2025 21:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.67,
+    "data_captura": "04/05/2025 21:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.29,
+    "data_captura": "04/05/2025 21:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.19,
+    "data_captura": "04/05/2025 21:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.43,
+    "data_captura": "04/05/2025 21:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.35,
+    "data_captura": "04/05/2025 21:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.41,
+    "data_captura": "04/05/2025 21:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.41,
+    "data_captura": "04/05/2025 21:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.67,
+    "data_captura": "04/05/2025 21:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.25,
+    "data_captura": "04/05/2025 21:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.47,
+    "data_captura": "04/05/2025 21:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.36,
+    "data_captura": "04/05/2025 21:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.62,
+    "data_captura": "04/05/2025 21:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.21,
+    "data_captura": "04/05/2025 21:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.48,
+    "data_captura": "04/05/2025 21:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.43,
+    "data_captura": "04/05/2025 21:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.54,
+    "data_captura": "04/05/2025 21:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.65,
+    "data_captura": "04/05/2025 21:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.81,
+    "data_captura": "04/05/2025 21:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.65,
+    "data_captura": "04/05/2025 21:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.15,
+    "data_captura": "04/05/2025 21:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.38,
+    "data_captura": "04/05/2025 22:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.5,
+    "data_captura": "04/05/2025 22:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.12,
+    "data_captura": "04/05/2025 22:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.62,
+    "data_captura": "04/05/2025 22:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.47,
+    "data_captura": "04/05/2025 22:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.73,
+    "data_captura": "04/05/2025 22:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.39,
+    "data_captura": "04/05/2025 22:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.68,
+    "data_captura": "04/05/2025 22:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 52.1,
+    "data_captura": "04/05/2025 22:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.96,
+    "data_captura": "04/05/2025 22:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.53,
+    "data_captura": "04/05/2025 22:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.72,
+    "data_captura": "04/05/2025 22:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.38,
+    "data_captura": "04/05/2025 22:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.18,
+    "data_captura": "04/05/2025 22:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.47,
+    "data_captura": "04/05/2025 22:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.03,
+    "data_captura": "04/05/2025 22:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.95,
+    "data_captura": "04/05/2025 22:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.38,
+    "data_captura": "04/05/2025 22:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.62,
+    "data_captura": "04/05/2025 22:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.04,
+    "data_captura": "04/05/2025 22:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.95,
+    "data_captura": "04/05/2025 22:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.35,
+    "data_captura": "04/05/2025 22:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.19,
+    "data_captura": "04/05/2025 22:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.86,
+    "data_captura": "04/05/2025 22:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.22,
+    "data_captura": "04/05/2025 22:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.42,
+    "data_captura": "04/05/2025 22:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.45,
+    "data_captura": "04/05/2025 22:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.95,
+    "data_captura": "04/05/2025 22:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.36,
+    "data_captura": "04/05/2025 22:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.94,
+    "data_captura": "04/05/2025 22:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.59,
+    "data_captura": "04/05/2025 22:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.34,
+    "data_captura": "04/05/2025 22:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.21,
+    "data_captura": "04/05/2025 22:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.37,
+    "data_captura": "04/05/2025 22:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.84,
+    "data_captura": "04/05/2025 22:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.73,
+    "data_captura": "04/05/2025 22:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.64,
+    "data_captura": "04/05/2025 22:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.67,
+    "data_captura": "04/05/2025 22:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 51.23,
+    "data_captura": "04/05/2025 22:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.61,
+    "data_captura": "04/05/2025 22:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.49,
+    "data_captura": "04/05/2025 22:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.76,
+    "data_captura": "04/05/2025 22:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.96,
+    "data_captura": "04/05/2025 22:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.88,
+    "data_captura": "04/05/2025 22:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.54,
+    "data_captura": "04/05/2025 22:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.62,
+    "data_captura": "04/05/2025 22:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.12,
+    "data_captura": "04/05/2025 22:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.76,
+    "data_captura": "04/05/2025 22:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.09,
+    "data_captura": "04/05/2025 22:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.49,
+    "data_captura": "04/05/2025 22:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.9,
+    "data_captura": "04/05/2025 22:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.4,
+    "data_captura": "04/05/2025 22:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.67,
+    "data_captura": "04/05/2025 22:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.2,
+    "data_captura": "04/05/2025 22:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.74,
+    "data_captura": "04/05/2025 22:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.46,
+    "data_captura": "04/05/2025 22:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.44,
+    "data_captura": "04/05/2025 22:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.87,
+    "data_captura": "04/05/2025 22:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.29,
+    "data_captura": "04/05/2025 22:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.24,
+    "data_captura": "04/05/2025 22:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.07,
+    "data_captura": "04/05/2025 23:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.81,
+    "data_captura": "04/05/2025 23:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.02,
+    "data_captura": "04/05/2025 23:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.07,
+    "data_captura": "04/05/2025 23:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.16,
+    "data_captura": "04/05/2025 23:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.06,
+    "data_captura": "04/05/2025 23:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.46,
+    "data_captura": "04/05/2025 23:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.97,
+    "data_captura": "04/05/2025 23:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.84,
+    "data_captura": "04/05/2025 23:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.37,
+    "data_captura": "04/05/2025 23:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.23,
+    "data_captura": "04/05/2025 23:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.32,
+    "data_captura": "04/05/2025 23:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.49,
+    "data_captura": "04/05/2025 23:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.39,
+    "data_captura": "04/05/2025 23:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 50.28,
+    "data_captura": "04/05/2025 23:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.4,
+    "data_captura": "04/05/2025 23:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.92,
+    "data_captura": "04/05/2025 23:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.61,
+    "data_captura": "04/05/2025 23:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.27,
+    "data_captura": "04/05/2025 23:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.11,
+    "data_captura": "04/05/2025 23:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.38,
+    "data_captura": "04/05/2025 23:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.72,
+    "data_captura": "04/05/2025 23:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.91,
+    "data_captura": "04/05/2025 23:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.17,
+    "data_captura": "04/05/2025 23:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.17,
+    "data_captura": "04/05/2025 23:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.62,
+    "data_captura": "04/05/2025 23:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.44,
+    "data_captura": "04/05/2025 23:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.88,
+    "data_captura": "04/05/2025 23:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.81,
+    "data_captura": "04/05/2025 23:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.47,
+    "data_captura": "04/05/2025 23:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.38,
+    "data_captura": "04/05/2025 23:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.14,
+    "data_captura": "04/05/2025 23:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.24,
+    "data_captura": "04/05/2025 23:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.48,
+    "data_captura": "04/05/2025 23:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.49,
+    "data_captura": "04/05/2025 23:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.46,
+    "data_captura": "04/05/2025 23:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.58,
+    "data_captura": "04/05/2025 23:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.69,
+    "data_captura": "04/05/2025 23:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.08,
+    "data_captura": "04/05/2025 23:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.4,
+    "data_captura": "04/05/2025 23:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.28,
+    "data_captura": "04/05/2025 23:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.69,
+    "data_captura": "04/05/2025 23:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.64,
+    "data_captura": "04/05/2025 23:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.6,
+    "data_captura": "04/05/2025 23:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.28,
+    "data_captura": "04/05/2025 23:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.99,
+    "data_captura": "04/05/2025 23:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.91,
+    "data_captura": "04/05/2025 23:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.57,
+    "data_captura": "04/05/2025 23:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 49.2,
+    "data_captura": "04/05/2025 23:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.69,
+    "data_captura": "04/05/2025 23:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.47,
+    "data_captura": "04/05/2025 23:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.59,
+    "data_captura": "04/05/2025 23:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.06,
+    "data_captura": "04/05/2025 23:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.24,
+    "data_captura": "04/05/2025 23:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.33,
+    "data_captura": "04/05/2025 23:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.15,
+    "data_captura": "04/05/2025 23:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.25,
+    "data_captura": "04/05/2025 23:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.47,
+    "data_captura": "04/05/2025 23:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.25,
+    "data_captura": "04/05/2025 23:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.55,
+    "data_captura": "04/05/2025 23:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.24,
+    "data_captura": "05/05/2025 00:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.19,
+    "data_captura": "05/05/2025 00:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.89,
+    "data_captura": "05/05/2025 00:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.5,
+    "data_captura": "05/05/2025 00:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.11,
+    "data_captura": "05/05/2025 00:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.33,
+    "data_captura": "05/05/2025 00:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.68,
+    "data_captura": "05/05/2025 00:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.19,
+    "data_captura": "05/05/2025 00:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.27,
+    "data_captura": "05/05/2025 00:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.34,
+    "data_captura": "05/05/2025 00:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.01,
+    "data_captura": "05/05/2025 00:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.28,
+    "data_captura": "05/05/2025 00:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.36,
+    "data_captura": "05/05/2025 00:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.14,
+    "data_captura": "05/05/2025 00:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.53,
+    "data_captura": "05/05/2025 00:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.21,
+    "data_captura": "05/05/2025 00:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.02,
+    "data_captura": "05/05/2025 00:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.15,
+    "data_captura": "05/05/2025 00:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.17,
+    "data_captura": "05/05/2025 00:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.07,
+    "data_captura": "05/05/2025 00:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.97,
+    "data_captura": "05/05/2025 00:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.69,
+    "data_captura": "05/05/2025 00:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.32,
+    "data_captura": "05/05/2025 00:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.63,
+    "data_captura": "05/05/2025 00:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.36,
+    "data_captura": "05/05/2025 00:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.39,
+    "data_captura": "05/05/2025 00:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.68,
+    "data_captura": "05/05/2025 00:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.35,
+    "data_captura": "05/05/2025 00:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.77,
+    "data_captura": "05/05/2025 00:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.74,
+    "data_captura": "05/05/2025 00:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 48.08,
+    "data_captura": "05/05/2025 00:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.13,
+    "data_captura": "05/05/2025 00:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.95,
+    "data_captura": "05/05/2025 00:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.88,
+    "data_captura": "05/05/2025 00:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.59,
+    "data_captura": "05/05/2025 00:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.36,
+    "data_captura": "05/05/2025 00:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.51,
+    "data_captura": "05/05/2025 00:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.88,
+    "data_captura": "05/05/2025 00:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.26,
+    "data_captura": "05/05/2025 00:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.58,
+    "data_captura": "05/05/2025 00:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.45,
+    "data_captura": "05/05/2025 00:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.27,
+    "data_captura": "05/05/2025 00:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.36,
+    "data_captura": "05/05/2025 00:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.21,
+    "data_captura": "05/05/2025 00:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.16,
+    "data_captura": "05/05/2025 00:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.87,
+    "data_captura": "05/05/2025 00:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.73,
+    "data_captura": "05/05/2025 00:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.24,
+    "data_captura": "05/05/2025 00:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.28,
+    "data_captura": "05/05/2025 00:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.87,
+    "data_captura": "05/05/2025 00:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.34,
+    "data_captura": "05/05/2025 00:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.87,
+    "data_captura": "05/05/2025 00:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.47,
+    "data_captura": "05/05/2025 00:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.87,
+    "data_captura": "05/05/2025 00:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.08,
+    "data_captura": "05/05/2025 00:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.87,
+    "data_captura": "05/05/2025 00:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.44,
+    "data_captura": "05/05/2025 00:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.88,
+    "data_captura": "05/05/2025 00:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.43,
+    "data_captura": "05/05/2025 00:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.59,
+    "data_captura": "05/05/2025 00:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.15,
+    "data_captura": "05/05/2025 01:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.62,
+    "data_captura": "05/05/2025 01:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.92,
+    "data_captura": "05/05/2025 01:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 47.08,
+    "data_captura": "05/05/2025 01:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.49,
+    "data_captura": "05/05/2025 01:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.9,
+    "data_captura": "05/05/2025 01:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.75,
+    "data_captura": "05/05/2025 01:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.5,
+    "data_captura": "05/05/2025 01:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.08,
+    "data_captura": "05/05/2025 01:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.86,
+    "data_captura": "05/05/2025 01:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.89,
+    "data_captura": "05/05/2025 01:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.13,
+    "data_captura": "05/05/2025 01:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.47,
+    "data_captura": "05/05/2025 01:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.3,
+    "data_captura": "05/05/2025 01:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.19,
+    "data_captura": "05/05/2025 01:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.31,
+    "data_captura": "05/05/2025 01:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.19,
+    "data_captura": "05/05/2025 01:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.51,
+    "data_captura": "05/05/2025 01:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.67,
+    "data_captura": "05/05/2025 01:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.95,
+    "data_captura": "05/05/2025 01:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.57,
+    "data_captura": "05/05/2025 01:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.1,
+    "data_captura": "05/05/2025 01:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.03,
+    "data_captura": "05/05/2025 01:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.93,
+    "data_captura": "05/05/2025 01:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.74,
+    "data_captura": "05/05/2025 01:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.03,
+    "data_captura": "05/05/2025 01:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.24,
+    "data_captura": "05/05/2025 01:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.79,
+    "data_captura": "05/05/2025 01:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.64,
+    "data_captura": "05/05/2025 01:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.49,
+    "data_captura": "05/05/2025 01:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.89,
+    "data_captura": "05/05/2025 01:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.52,
+    "data_captura": "05/05/2025 01:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.92,
+    "data_captura": "05/05/2025 01:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.77,
+    "data_captura": "05/05/2025 01:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 46.03,
+    "data_captura": "05/05/2025 01:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.63,
+    "data_captura": "05/05/2025 01:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.53,
+    "data_captura": "05/05/2025 01:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.33,
+    "data_captura": "05/05/2025 01:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.43,
+    "data_captura": "05/05/2025 01:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.36,
+    "data_captura": "05/05/2025 01:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.42,
+    "data_captura": "05/05/2025 01:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.05,
+    "data_captura": "05/05/2025 01:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45,
+    "data_captura": "05/05/2025 01:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.21,
+    "data_captura": "05/05/2025 01:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.55,
+    "data_captura": "05/05/2025 01:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.69,
+    "data_captura": "05/05/2025 01:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.83,
+    "data_captura": "05/05/2025 01:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.1,
+    "data_captura": "05/05/2025 01:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.61,
+    "data_captura": "05/05/2025 01:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.35,
+    "data_captura": "05/05/2025 01:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.03,
+    "data_captura": "05/05/2025 01:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.66,
+    "data_captura": "05/05/2025 01:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.85,
+    "data_captura": "05/05/2025 01:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.35,
+    "data_captura": "05/05/2025 01:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.23,
+    "data_captura": "05/05/2025 01:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.4,
+    "data_captura": "05/05/2025 01:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.47,
+    "data_captura": "05/05/2025 01:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.51,
+    "data_captura": "05/05/2025 01:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.13,
+    "data_captura": "05/05/2025 01:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.21,
+    "data_captura": "05/05/2025 01:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.99,
+    "data_captura": "05/05/2025 02:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.88,
+    "data_captura": "05/05/2025 02:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 45.17,
+    "data_captura": "05/05/2025 02:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.92,
+    "data_captura": "05/05/2025 02:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.66,
+    "data_captura": "05/05/2025 02:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.46,
+    "data_captura": "05/05/2025 02:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.37,
+    "data_captura": "05/05/2025 02:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.43,
+    "data_captura": "05/05/2025 02:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.75,
+    "data_captura": "05/05/2025 02:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.59,
+    "data_captura": "05/05/2025 02:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.34,
+    "data_captura": "05/05/2025 02:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.39,
+    "data_captura": "05/05/2025 02:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.87,
+    "data_captura": "05/05/2025 02:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.76,
+    "data_captura": "05/05/2025 02:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44,
+    "data_captura": "05/05/2025 02:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.14,
+    "data_captura": "05/05/2025 02:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.69,
+    "data_captura": "05/05/2025 02:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.34,
+    "data_captura": "05/05/2025 02:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.42,
+    "data_captura": "05/05/2025 02:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.38,
+    "data_captura": "05/05/2025 02:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42,
+    "data_captura": "05/05/2025 02:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.92,
+    "data_captura": "05/05/2025 02:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.56,
+    "data_captura": "05/05/2025 02:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.74,
+    "data_captura": "05/05/2025 02:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.61,
+    "data_captura": "05/05/2025 02:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.1,
+    "data_captura": "05/05/2025 02:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.84,
+    "data_captura": "05/05/2025 02:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.86,
+    "data_captura": "05/05/2025 02:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.22,
+    "data_captura": "05/05/2025 02:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.31,
+    "data_captura": "05/05/2025 02:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.44,
+    "data_captura": "05/05/2025 02:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.1,
+    "data_captura": "05/05/2025 02:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.69,
+    "data_captura": "05/05/2025 02:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.54,
+    "data_captura": "05/05/2025 02:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.68,
+    "data_captura": "05/05/2025 02:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.65,
+    "data_captura": "05/05/2025 02:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.63,
+    "data_captura": "05/05/2025 02:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.08,
+    "data_captura": "05/05/2025 02:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.69,
+    "data_captura": "05/05/2025 02:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.18,
+    "data_captura": "05/05/2025 02:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.55,
+    "data_captura": "05/05/2025 02:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.27,
+    "data_captura": "05/05/2025 02:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 44.08,
+    "data_captura": "05/05/2025 02:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.93,
+    "data_captura": "05/05/2025 02:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.65,
+    "data_captura": "05/05/2025 02:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.54,
+    "data_captura": "05/05/2025 02:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.76,
+    "data_captura": "05/05/2025 02:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.64,
+    "data_captura": "05/05/2025 02:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.58,
+    "data_captura": "05/05/2025 02:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.14,
+    "data_captura": "05/05/2025 02:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.9,
+    "data_captura": "05/05/2025 02:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.37,
+    "data_captura": "05/05/2025 02:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.49,
+    "data_captura": "05/05/2025 02:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.64,
+    "data_captura": "05/05/2025 02:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.56,
+    "data_captura": "05/05/2025 02:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.85,
+    "data_captura": "05/05/2025 02:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.77,
+    "data_captura": "05/05/2025 02:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.35,
+    "data_captura": "05/05/2025 02:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.89,
+    "data_captura": "05/05/2025 02:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.12,
+    "data_captura": "05/05/2025 02:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.5,
+    "data_captura": "05/05/2025 03:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.96,
+    "data_captura": "05/05/2025 03:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.94,
+    "data_captura": "05/05/2025 03:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.64,
+    "data_captura": "05/05/2025 03:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.23,
+    "data_captura": "05/05/2025 03:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.45,
+    "data_captura": "05/05/2025 03:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.54,
+    "data_captura": "05/05/2025 03:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.58,
+    "data_captura": "05/05/2025 03:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.45,
+    "data_captura": "05/05/2025 03:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.67,
+    "data_captura": "05/05/2025 03:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.54,
+    "data_captura": "05/05/2025 03:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.52,
+    "data_captura": "05/05/2025 03:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.55,
+    "data_captura": "05/05/2025 03:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.3,
+    "data_captura": "05/05/2025 03:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.65,
+    "data_captura": "05/05/2025 03:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.12,
+    "data_captura": "05/05/2025 03:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.21,
+    "data_captura": "05/05/2025 03:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.44,
+    "data_captura": "05/05/2025 03:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.68,
+    "data_captura": "05/05/2025 03:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.32,
+    "data_captura": "05/05/2025 03:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.38,
+    "data_captura": "05/05/2025 03:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.61,
+    "data_captura": "05/05/2025 03:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.16,
+    "data_captura": "05/05/2025 03:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.67,
+    "data_captura": "05/05/2025 03:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.25,
+    "data_captura": "05/05/2025 03:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.17,
+    "data_captura": "05/05/2025 03:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 43.08,
+    "data_captura": "05/05/2025 03:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.86,
+    "data_captura": "05/05/2025 03:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.35,
+    "data_captura": "05/05/2025 03:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.82,
+    "data_captura": "05/05/2025 03:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.85,
+    "data_captura": "05/05/2025 03:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.63,
+    "data_captura": "05/05/2025 03:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.65,
+    "data_captura": "05/05/2025 03:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.38,
+    "data_captura": "05/05/2025 03:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.64,
+    "data_captura": "05/05/2025 03:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.57,
+    "data_captura": "05/05/2025 03:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.19,
+    "data_captura": "05/05/2025 03:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.1,
+    "data_captura": "05/05/2025 03:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40,
+    "data_captura": "05/05/2025 03:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.75,
+    "data_captura": "05/05/2025 03:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.49,
+    "data_captura": "05/05/2025 03:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.02,
+    "data_captura": "05/05/2025 03:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.61,
+    "data_captura": "05/05/2025 03:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.89,
+    "data_captura": "05/05/2025 03:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42,
+    "data_captura": "05/05/2025 03:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41,
+    "data_captura": "05/05/2025 03:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.35,
+    "data_captura": "05/05/2025 03:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.11,
+    "data_captura": "05/05/2025 03:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.14,
+    "data_captura": "05/05/2025 03:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.23,
+    "data_captura": "05/05/2025 03:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.11,
+    "data_captura": "05/05/2025 03:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.75,
+    "data_captura": "05/05/2025 03:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 42.03,
+    "data_captura": "05/05/2025 03:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.87,
+    "data_captura": "05/05/2025 03:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.48,
+    "data_captura": "05/05/2025 03:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.49,
+    "data_captura": "05/05/2025 03:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.37,
+    "data_captura": "05/05/2025 03:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.54,
+    "data_captura": "05/05/2025 03:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.88,
+    "data_captura": "05/05/2025 03:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.33,
+    "data_captura": "05/05/2025 03:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.39,
+    "data_captura": "05/05/2025 04:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.95,
+    "data_captura": "05/05/2025 04:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.4,
+    "data_captura": "05/05/2025 04:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.26,
+    "data_captura": "05/05/2025 04:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.36,
+    "data_captura": "05/05/2025 04:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.66,
+    "data_captura": "05/05/2025 04:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.04,
+    "data_captura": "05/05/2025 04:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.18,
+    "data_captura": "05/05/2025 04:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.47,
+    "data_captura": "05/05/2025 04:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.82,
+    "data_captura": "05/05/2025 04:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.41,
+    "data_captura": "05/05/2025 04:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.66,
+    "data_captura": "05/05/2025 04:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.88,
+    "data_captura": "05/05/2025 04:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.47,
+    "data_captura": "05/05/2025 04:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.3,
+    "data_captura": "05/05/2025 04:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 40.79,
+    "data_captura": "05/05/2025 04:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 38.99,
+    "data_captura": "05/05/2025 04:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 41.23,
+    "data_captura": "05/05/2025 04:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 38.69,
+    "data_captura": "05/05/2025 04:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.47,
+    "data_captura": "05/05/2025 04:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 38.91,
+    "data_captura": "05/05/2025 04:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 38.87,
+    "data_captura": "05/05/2025 04:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 39.49,
+    "data_captura": "05/05/2025 04:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.92,
+    "data_captura": "05/05/2025 04:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.04,
+    "data_captura": "05/05/2025 04:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.63,
+    "data_captura": "05/05/2025 04:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.24,
+    "data_captura": "05/05/2025 04:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.05,
+    "data_captura": "05/05/2025 04:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.19,
+    "data_captura": "05/05/2025 04:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.9,
+    "data_captura": "05/05/2025 04:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.89,
+    "data_captura": "05/05/2025 04:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.23,
+    "data_captura": "05/05/2025 04:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.48,
+    "data_captura": "05/05/2025 04:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.23,
+    "data_captura": "05/05/2025 04:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.17,
+    "data_captura": "05/05/2025 04:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.77,
+    "data_captura": "05/05/2025 04:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.03,
+    "data_captura": "05/05/2025 04:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.72,
+    "data_captura": "05/05/2025 04:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.41,
+    "data_captura": "05/05/2025 04:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.99,
+    "data_captura": "05/05/2025 04:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.37,
+    "data_captura": "05/05/2025 04:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.48,
+    "data_captura": "05/05/2025 04:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.32,
+    "data_captura": "05/05/2025 04:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.19,
+    "data_captura": "05/05/2025 04:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.43,
+    "data_captura": "05/05/2025 04:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.24,
+    "data_captura": "05/05/2025 04:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.45,
+    "data_captura": "05/05/2025 04:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.06,
+    "data_captura": "05/05/2025 04:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.27,
+    "data_captura": "05/05/2025 04:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.08,
+    "data_captura": "05/05/2025 04:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.61,
+    "data_captura": "05/05/2025 04:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.94,
+    "data_captura": "05/05/2025 04:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.4,
+    "data_captura": "05/05/2025 04:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.81,
+    "data_captura": "05/05/2025 04:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.17,
+    "data_captura": "05/05/2025 04:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.02,
+    "data_captura": "05/05/2025 04:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.11,
+    "data_captura": "05/05/2025 04:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.49,
+    "data_captura": "05/05/2025 04:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.54,
+    "data_captura": "05/05/2025 04:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.52,
+    "data_captura": "05/05/2025 04:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.74,
+    "data_captura": "05/05/2025 05:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.73,
+    "data_captura": "05/05/2025 05:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.03,
+    "data_captura": "05/05/2025 05:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.13,
+    "data_captura": "05/05/2025 05:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.52,
+    "data_captura": "05/05/2025 05:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.79,
+    "data_captura": "05/05/2025 05:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.85,
+    "data_captura": "05/05/2025 05:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.6,
+    "data_captura": "05/05/2025 05:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.29,
+    "data_captura": "05/05/2025 05:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.26,
+    "data_captura": "05/05/2025 05:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.47,
+    "data_captura": "05/05/2025 05:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.4,
+    "data_captura": "05/05/2025 05:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.45,
+    "data_captura": "05/05/2025 05:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.62,
+    "data_captura": "05/05/2025 05:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.31,
+    "data_captura": "05/05/2025 05:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.91,
+    "data_captura": "05/05/2025 05:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.61,
+    "data_captura": "05/05/2025 05:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.71,
+    "data_captura": "05/05/2025 05:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.95,
+    "data_captura": "05/05/2025 05:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.24,
+    "data_captura": "05/05/2025 05:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.11,
+    "data_captura": "05/05/2025 05:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.04,
+    "data_captura": "05/05/2025 05:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.2,
+    "data_captura": "05/05/2025 05:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.4,
+    "data_captura": "05/05/2025 05:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.11,
+    "data_captura": "05/05/2025 05:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.78,
+    "data_captura": "05/05/2025 05:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.59,
+    "data_captura": "05/05/2025 05:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.1,
+    "data_captura": "05/05/2025 05:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.07,
+    "data_captura": "05/05/2025 05:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.81,
+    "data_captura": "05/05/2025 05:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.73,
+    "data_captura": "05/05/2025 05:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.77,
+    "data_captura": "05/05/2025 05:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.23,
+    "data_captura": "05/05/2025 05:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.3,
+    "data_captura": "05/05/2025 05:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.93,
+    "data_captura": "05/05/2025 05:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.8,
+    "data_captura": "05/05/2025 05:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56,
+    "data_captura": "05/05/2025 05:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.68,
+    "data_captura": "05/05/2025 05:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.74,
+    "data_captura": "05/05/2025 05:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.76,
+    "data_captura": "05/05/2025 05:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.74,
+    "data_captura": "05/05/2025 05:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.53,
+    "data_captura": "05/05/2025 05:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.19,
+    "data_captura": "05/05/2025 05:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.55,
+    "data_captura": "05/05/2025 05:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.5,
+    "data_captura": "05/05/2025 05:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.88,
+    "data_captura": "05/05/2025 05:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.45,
+    "data_captura": "05/05/2025 05:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.29,
+    "data_captura": "05/05/2025 05:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.61,
+    "data_captura": "05/05/2025 05:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.04,
+    "data_captura": "05/05/2025 05:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.34,
+    "data_captura": "05/05/2025 05:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.84,
+    "data_captura": "05/05/2025 05:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.5,
+    "data_captura": "05/05/2025 05:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.77,
+    "data_captura": "05/05/2025 05:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.85,
+    "data_captura": "05/05/2025 05:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.24,
+    "data_captura": "05/05/2025 05:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.93,
+    "data_captura": "05/05/2025 05:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64,
+    "data_captura": "05/05/2025 05:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.65,
+    "data_captura": "05/05/2025 05:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.42,
+    "data_captura": "05/05/2025 05:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.75,
+    "data_captura": "05/05/2025 06:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.24,
+    "data_captura": "05/05/2025 06:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.12,
+    "data_captura": "05/05/2025 06:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.75,
+    "data_captura": "05/05/2025 06:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.36,
+    "data_captura": "05/05/2025 06:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.62,
+    "data_captura": "05/05/2025 06:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.16,
+    "data_captura": "05/05/2025 06:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.39,
+    "data_captura": "05/05/2025 06:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.69,
+    "data_captura": "05/05/2025 06:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.37,
+    "data_captura": "05/05/2025 06:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.6,
+    "data_captura": "05/05/2025 06:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.5,
+    "data_captura": "05/05/2025 06:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.68,
+    "data_captura": "05/05/2025 06:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.84,
+    "data_captura": "05/05/2025 06:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.81,
+    "data_captura": "05/05/2025 06:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.26,
+    "data_captura": "05/05/2025 06:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.75,
+    "data_captura": "05/05/2025 06:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.84,
+    "data_captura": "05/05/2025 06:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.14,
+    "data_captura": "05/05/2025 06:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.61,
+    "data_captura": "05/05/2025 06:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.79,
+    "data_captura": "05/05/2025 06:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.59,
+    "data_captura": "05/05/2025 06:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.4,
+    "data_captura": "05/05/2025 06:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.25,
+    "data_captura": "05/05/2025 06:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.66,
+    "data_captura": "05/05/2025 06:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.08,
+    "data_captura": "05/05/2025 06:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.87,
+    "data_captura": "05/05/2025 06:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.36,
+    "data_captura": "05/05/2025 06:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.73,
+    "data_captura": "05/05/2025 06:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.12,
+    "data_captura": "05/05/2025 06:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.75,
+    "data_captura": "05/05/2025 06:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.18,
+    "data_captura": "05/05/2025 06:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.8,
+    "data_captura": "05/05/2025 06:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.22,
+    "data_captura": "05/05/2025 06:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.37,
+    "data_captura": "05/05/2025 06:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.84,
+    "data_captura": "05/05/2025 06:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.61,
+    "data_captura": "05/05/2025 06:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.26,
+    "data_captura": "05/05/2025 06:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.9,
+    "data_captura": "05/05/2025 06:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.5,
+    "data_captura": "05/05/2025 06:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.06,
+    "data_captura": "05/05/2025 06:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.42,
+    "data_captura": "05/05/2025 06:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.89,
+    "data_captura": "05/05/2025 06:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.59,
+    "data_captura": "05/05/2025 06:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.24,
+    "data_captura": "05/05/2025 06:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.64,
+    "data_captura": "05/05/2025 06:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.26,
+    "data_captura": "05/05/2025 06:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.31,
+    "data_captura": "05/05/2025 06:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.79,
+    "data_captura": "05/05/2025 06:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.43,
+    "data_captura": "05/05/2025 06:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.4,
+    "data_captura": "05/05/2025 06:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.59,
+    "data_captura": "05/05/2025 06:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.68,
+    "data_captura": "05/05/2025 06:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.23,
+    "data_captura": "05/05/2025 06:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.86,
+    "data_captura": "05/05/2025 06:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.89,
+    "data_captura": "05/05/2025 06:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.71,
+    "data_captura": "05/05/2025 06:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.06,
+    "data_captura": "05/05/2025 06:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.91,
+    "data_captura": "05/05/2025 06:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.18,
+    "data_captura": "05/05/2025 06:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.96,
+    "data_captura": "05/05/2025 07:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.02,
+    "data_captura": "05/05/2025 07:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.42,
+    "data_captura": "05/05/2025 07:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.09,
+    "data_captura": "05/05/2025 07:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.44,
+    "data_captura": "05/05/2025 07:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.28,
+    "data_captura": "05/05/2025 07:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.27,
+    "data_captura": "05/05/2025 07:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.45,
+    "data_captura": "05/05/2025 07:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.44,
+    "data_captura": "05/05/2025 07:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.14,
+    "data_captura": "05/05/2025 07:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.34,
+    "data_captura": "05/05/2025 07:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.46,
+    "data_captura": "05/05/2025 07:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.88,
+    "data_captura": "05/05/2025 07:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.81,
+    "data_captura": "05/05/2025 07:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.43,
+    "data_captura": "05/05/2025 07:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.91,
+    "data_captura": "05/05/2025 07:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.25,
+    "data_captura": "05/05/2025 07:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.05,
+    "data_captura": "05/05/2025 07:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.31,
+    "data_captura": "05/05/2025 07:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.47,
+    "data_captura": "05/05/2025 07:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.47,
+    "data_captura": "05/05/2025 07:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.55,
+    "data_captura": "05/05/2025 07:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.02,
+    "data_captura": "05/05/2025 07:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.64,
+    "data_captura": "05/05/2025 07:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.9,
+    "data_captura": "05/05/2025 07:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.63,
+    "data_captura": "05/05/2025 07:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.6,
+    "data_captura": "05/05/2025 07:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.65,
+    "data_captura": "05/05/2025 07:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.62,
+    "data_captura": "05/05/2025 07:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.42,
+    "data_captura": "05/05/2025 07:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.83,
+    "data_captura": "05/05/2025 07:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.73,
+    "data_captura": "05/05/2025 07:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.09,
+    "data_captura": "05/05/2025 07:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.98,
+    "data_captura": "05/05/2025 07:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.6,
+    "data_captura": "05/05/2025 07:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.91,
+    "data_captura": "05/05/2025 07:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.04,
+    "data_captura": "05/05/2025 07:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.67,
+    "data_captura": "05/05/2025 07:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.47,
+    "data_captura": "05/05/2025 07:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.33,
+    "data_captura": "05/05/2025 07:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.48,
+    "data_captura": "05/05/2025 07:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.05,
+    "data_captura": "05/05/2025 07:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.4,
+    "data_captura": "05/05/2025 07:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.16,
+    "data_captura": "05/05/2025 07:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.2,
+    "data_captura": "05/05/2025 07:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.73,
+    "data_captura": "05/05/2025 07:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.88,
+    "data_captura": "05/05/2025 07:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.5,
+    "data_captura": "05/05/2025 07:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.16,
+    "data_captura": "05/05/2025 07:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.58,
+    "data_captura": "05/05/2025 07:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.73,
+    "data_captura": "05/05/2025 07:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.35,
+    "data_captura": "05/05/2025 07:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.48,
+    "data_captura": "05/05/2025 07:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.94,
+    "data_captura": "05/05/2025 07:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63,
+    "data_captura": "05/05/2025 07:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.37,
+    "data_captura": "05/05/2025 07:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.59,
+    "data_captura": "05/05/2025 07:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.65,
+    "data_captura": "05/05/2025 07:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.15,
+    "data_captura": "05/05/2025 07:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.83,
+    "data_captura": "05/05/2025 07:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.36,
+    "data_captura": "05/05/2025 08:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.31,
+    "data_captura": "05/05/2025 08:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.05,
+    "data_captura": "05/05/2025 08:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.96,
+    "data_captura": "05/05/2025 08:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.64,
+    "data_captura": "05/05/2025 08:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.42,
+    "data_captura": "05/05/2025 08:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.69,
+    "data_captura": "05/05/2025 08:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.02,
+    "data_captura": "05/05/2025 08:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.51,
+    "data_captura": "05/05/2025 08:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.95,
+    "data_captura": "05/05/2025 08:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.36,
+    "data_captura": "05/05/2025 08:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.34,
+    "data_captura": "05/05/2025 08:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.21,
+    "data_captura": "05/05/2025 08:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.95,
+    "data_captura": "05/05/2025 08:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.24,
+    "data_captura": "05/05/2025 08:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.83,
+    "data_captura": "05/05/2025 08:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.9,
+    "data_captura": "05/05/2025 08:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.77,
+    "data_captura": "05/05/2025 08:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.92,
+    "data_captura": "05/05/2025 08:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.46,
+    "data_captura": "05/05/2025 08:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.16,
+    "data_captura": "05/05/2025 08:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.99,
+    "data_captura": "05/05/2025 08:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.81,
+    "data_captura": "05/05/2025 08:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.18,
+    "data_captura": "05/05/2025 08:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.28,
+    "data_captura": "05/05/2025 08:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.88,
+    "data_captura": "05/05/2025 08:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.06,
+    "data_captura": "05/05/2025 08:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.74,
+    "data_captura": "05/05/2025 08:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.76,
+    "data_captura": "05/05/2025 08:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.49,
+    "data_captura": "05/05/2025 08:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.12,
+    "data_captura": "05/05/2025 08:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.67,
+    "data_captura": "05/05/2025 08:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.72,
+    "data_captura": "05/05/2025 08:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.99,
+    "data_captura": "05/05/2025 08:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.77,
+    "data_captura": "05/05/2025 08:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.43,
+    "data_captura": "05/05/2025 08:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.58,
+    "data_captura": "05/05/2025 08:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.09,
+    "data_captura": "05/05/2025 08:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.55,
+    "data_captura": "05/05/2025 08:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.83,
+    "data_captura": "05/05/2025 08:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.65,
+    "data_captura": "05/05/2025 08:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.04,
+    "data_captura": "05/05/2025 08:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.97,
+    "data_captura": "05/05/2025 08:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.17,
+    "data_captura": "05/05/2025 08:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.35,
+    "data_captura": "05/05/2025 08:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.78,
+    "data_captura": "05/05/2025 08:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.3,
+    "data_captura": "05/05/2025 08:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.76,
+    "data_captura": "05/05/2025 08:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.34,
+    "data_captura": "05/05/2025 08:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.09,
+    "data_captura": "05/05/2025 08:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.76,
+    "data_captura": "05/05/2025 08:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.91,
+    "data_captura": "05/05/2025 08:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.96,
+    "data_captura": "05/05/2025 08:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.33,
+    "data_captura": "05/05/2025 08:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.79,
+    "data_captura": "05/05/2025 08:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.65,
+    "data_captura": "05/05/2025 08:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.65,
+    "data_captura": "05/05/2025 08:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.21,
+    "data_captura": "05/05/2025 08:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.31,
+    "data_captura": "05/05/2025 08:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.09,
+    "data_captura": "05/05/2025 08:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.85,
+    "data_captura": "05/05/2025 09:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.66,
+    "data_captura": "05/05/2025 09:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.42,
+    "data_captura": "05/05/2025 09:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.7,
+    "data_captura": "05/05/2025 09:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.78,
+    "data_captura": "05/05/2025 09:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.7,
+    "data_captura": "05/05/2025 09:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.56,
+    "data_captura": "05/05/2025 09:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.82,
+    "data_captura": "05/05/2025 09:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.47,
+    "data_captura": "05/05/2025 09:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.37,
+    "data_captura": "05/05/2025 09:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.29,
+    "data_captura": "05/05/2025 09:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.88,
+    "data_captura": "05/05/2025 09:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.78,
+    "data_captura": "05/05/2025 09:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.42,
+    "data_captura": "05/05/2025 09:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.83,
+    "data_captura": "05/05/2025 09:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.03,
+    "data_captura": "05/05/2025 09:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.36,
+    "data_captura": "05/05/2025 09:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.27,
+    "data_captura": "05/05/2025 09:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.85,
+    "data_captura": "05/05/2025 09:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.66,
+    "data_captura": "05/05/2025 09:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.76,
+    "data_captura": "05/05/2025 09:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.26,
+    "data_captura": "05/05/2025 09:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.75,
+    "data_captura": "05/05/2025 09:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.7,
+    "data_captura": "05/05/2025 09:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.14,
+    "data_captura": "05/05/2025 09:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.63,
+    "data_captura": "05/05/2025 09:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.76,
+    "data_captura": "05/05/2025 09:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.74,
+    "data_captura": "05/05/2025 09:27"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.85,
+    "data_captura": "05/05/2025 09:28"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.86,
+    "data_captura": "05/05/2025 09:29"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.19,
+    "data_captura": "05/05/2025 09:30"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.48,
+    "data_captura": "05/05/2025 09:31"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.35,
+    "data_captura": "05/05/2025 09:32"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.72,
+    "data_captura": "05/05/2025 09:33"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.06,
+    "data_captura": "05/05/2025 09:34"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.71,
+    "data_captura": "05/05/2025 09:35"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.17,
+    "data_captura": "05/05/2025 09:36"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.06,
+    "data_captura": "05/05/2025 09:37"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.52,
+    "data_captura": "05/05/2025 09:38"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.46,
+    "data_captura": "05/05/2025 09:39"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.12,
+    "data_captura": "05/05/2025 09:40"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.14,
+    "data_captura": "05/05/2025 09:41"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.77,
+    "data_captura": "05/05/2025 09:42"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.56,
+    "data_captura": "05/05/2025 09:43"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.23,
+    "data_captura": "05/05/2025 09:44"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.83,
+    "data_captura": "05/05/2025 09:45"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.47,
+    "data_captura": "05/05/2025 09:46"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.28,
+    "data_captura": "05/05/2025 09:47"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.22,
+    "data_captura": "05/05/2025 09:48"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.74,
+    "data_captura": "05/05/2025 09:49"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.62,
+    "data_captura": "05/05/2025 09:50"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.76,
+    "data_captura": "05/05/2025 09:51"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.63,
+    "data_captura": "05/05/2025 09:52"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.69,
+    "data_captura": "05/05/2025 09:53"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.95,
+    "data_captura": "05/05/2025 09:54"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.06,
+    "data_captura": "05/05/2025 09:55"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.84,
+    "data_captura": "05/05/2025 09:56"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.38,
+    "data_captura": "05/05/2025 09:57"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.98,
+    "data_captura": "05/05/2025 09:58"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.61,
+    "data_captura": "05/05/2025 09:59"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.81,
+    "data_captura": "05/05/2025 10:00"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 56.37,
+    "data_captura": "05/05/2025 10:01"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.7,
+    "data_captura": "05/05/2025 10:02"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 55.35,
+    "data_captura": "05/05/2025 10:03"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.06,
+    "data_captura": "05/05/2025 10:04"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.79,
+    "data_captura": "05/05/2025 10:05"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.71,
+    "data_captura": "05/05/2025 10:06"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.36,
+    "data_captura": "05/05/2025 10:07"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.1,
+    "data_captura": "05/05/2025 10:08"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.15,
+    "data_captura": "05/05/2025 10:09"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.16,
+    "data_captura": "05/05/2025 10:10"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 58.34,
+    "data_captura": "05/05/2025 10:11"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.74,
+    "data_captura": "05/05/2025 10:12"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.59,
+    "data_captura": "05/05/2025 10:13"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 57.73,
+    "data_captura": "05/05/2025 10:14"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.39,
+    "data_captura": "05/05/2025 10:15"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.04,
+    "data_captura": "05/05/2025 10:16"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.71,
+    "data_captura": "05/05/2025 10:17"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 60.6,
+    "data_captura": "05/05/2025 10:18"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.18,
+    "data_captura": "05/05/2025 10:19"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.51,
+    "data_captura": "05/05/2025 10:20"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 62.05,
+    "data_captura": "05/05/2025 10:21"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 61.67,
+    "data_captura": "05/05/2025 10:22"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.54,
+    "data_captura": "05/05/2025 10:23"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.62,
+    "data_captura": "05/05/2025 10:24"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 63.68,
+    "data_captura": "05/05/2025 10:25"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 64.45,
+    "data_captura": "05/05/2025 10:26"
+  },
+  {
+    "fk_sensor": 6,
+    "valor": 59.59,
+    "data_captura": "05/05/2025 10:27"
+  }
+]
