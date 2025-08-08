@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Resource:
+  RawBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Raw
+    Properties:
+      BucketName: !Sub "raw-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: RawBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionRawToTrusted.Arn
+  TrustedBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Trusted
+    Properties:
+      BucketName: !Sub "trusted-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: TrustedBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionTrustedToClient.Arn
+  ClientBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "client-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: ClientBucket
