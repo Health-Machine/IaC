@@ -2,7 +2,7 @@ import boto3
 import urllib.parse
 
 s3 = boto3.client('s3')
-CLIENT_BUCKET = 'cliente-bucket-381492149341'
+CLIENT_BUCKET = 'client-bucket-381492149341'
 
 def lambda_handler(event, context):
     try:

@@ -3,6 +3,7 @@ import json
 import urllib.parse
 import csv
 import io
+from datetime import datetime
 
 s3 = boto3.client('s3')
 TRUSTED_BUCKET = 'trusted-bucket-381492149341'
@@ -43,10 +44,13 @@ def lambda_handler(event, context):
             valor = row.get("valor")
             data_captura = row.get("data_captura")
             if fk and valor and data_captura and valor != 0:
+                data = datetime.strptime(data_captura, "%d/%m/%Y %H:%M")
+                data = data.strftime("%Y-%m-%d %H:%M")
+
                 valid_rows.append({
                     "fk_sensor": fk,
                     "valor": valor,
-                    "data_captura": data_captura
+                    "data_captura": data
                 })
 
         # Se não houver linhas válidas, encerra

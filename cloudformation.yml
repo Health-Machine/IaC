@@ -72,9 +72,6 @@ Parameters:
     Type: String
     NoEcho: true
     Description: A senha de acesso ao jupyter
-  NomeBucketRAW:
-    Type: String
-    Description: Nome do Bucket RAW
   SetupBucket:
     Type: String
     Description: Nome do Bucket de Setup
@@ -191,36 +188,6 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${AWS::StackName}-${Client}
-
-  RawBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub "raw-bucket-${AWS::AccountId}"
-      Tags:
-        - Key: Name
-          Value: RawBucket
-      NotificationConfiguration:
-        LambdaConfigurations:
-          - Event: s3:ObjectCreated:*
-            Function: !GetAtt FunctionRawToTrusted.Arn
-  TrustedBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub "trusted-bucket-${AWS::AccountId}"
-      Tags:
-        - Key: Name
-          Value: TrustedBucket
-      NotificationConfiguration:
-        LambdaConfigurations:
-          - Event: s3:ObjectCreated:*
-            Function: !GetAtt FunctionTrustedToClient.Arn
-  ClientBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub "client-bucket-${AWS::AccountId}"
-      Tags:
-        - Key: Name
-          Value: ClientBucket
 
   RestApiUploadS3:
     Type: AWS::ApiGateway::RestApi
@@ -370,7 +337,7 @@ Resources:
       FunctionName: !Ref FunctionRawToTrusted
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
-      SourceArn: !Sub arn:aws:s3:::${RawBucket}
+      SourceArn: !Sub arn:aws:s3:::raw-bucket-381492149341
   
   FunctionTrustedToClient:
     Type: AWS::Lambda::Function
@@ -390,4 +357,36 @@ Resources:
       FunctionName: !Ref FunctionTrustedToClient
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
-      SourceArn: !Sub arn:aws:s3:::${TrustedBucket}
+      SourceArn: !Sub arn:aws:s3:::trusted-bucket-381492149341
+
+  RawBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Raw
+    Properties:
+      BucketName: !Sub "raw-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: RawBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionRawToTrusted.Arn
+  TrustedBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Trusted
+    Properties:
+      BucketName: !Sub "trusted-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: TrustedBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionTrustedToClient.Arn
+  ClientBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "client-bucket-${AWS::AccountId}"
+      Tags:
+        - Key: Name
+          Value: ClientBucket
