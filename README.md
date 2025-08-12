@@ -16,7 +16,7 @@ aws cloudformation deploy `
 ### Subir os arquivos no Bucket
 
 ```bash
-aws s3 cp ./lambda s3://setup-bucket-381492149341/ --recursive
+aws s3 cp ./lambda/setup s3://setup-bucket-199917718936/ --recursive
 ```
 
 ### Rodar a Stack Principal (cloudformation.yml)
