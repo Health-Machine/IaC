@@ -18,7 +18,6 @@ Metadata:
         Parameters:
           - Ec2KeyPairName
           - Ec2AmiId
-          - Ec2IamInstanceProfile
           - Ec2JupyterPassword
     ParameterLabels:
       Client:
@@ -33,8 +32,6 @@ Metadata:
         default: Chave de Acesso
       Ec2AmiId:
         default: AMI
-      Ec2IamInstanceProfile:
-        default: IAM Instance Profile Id
       Ec2JupyterPassword:
         default: Senha Jupyter
 
@@ -64,10 +61,6 @@ Parameters:
     Type: String
     Description: Id da AMI
     Default: ami-0f9fc25dd2506cf6d
-  Ec2IamInstanceProfile:
-    Type: String
-    Description: O nome do Instance Profile
-    Default: EMR_EC2_DefaultRole
   Ec2JupyterPassword:
     Type: String
     NoEcho: true
@@ -83,7 +76,7 @@ Resources:
       CidrBlock: !Ref VpcCidr
       Tags:
         - Key: Name
-          Value: !Sub ${AWS::StackName}-${Client}
+          Value: !Sub vpc-${Client}
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
@@ -152,7 +145,12 @@ Resources:
       ImageId: !Ref Ec2AmiId
       InstanceType: t3.small
       SubnetId: !Ref PublicSubnet
-      IamInstanceProfile: !Ref Ec2IamInstanceProfile
+      IamInstanceProfile: EMR_EC2_DefaultRole
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub jupyter-${Client}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -183,11 +181,6 @@ Resources:
           systemctl daemon-reload
           systemctl start jupyter
           systemctl enable jupyter
-      SecurityGroupIds:
-        - !Ref InstanceSecurityGroup
-      Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-${Client}
 
   RestApiUploadS3:
     Type: AWS::ApiGateway::RestApi
@@ -238,7 +231,7 @@ Resources:
         Type: AWS
         IntegrationHttpMethod: PUT
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/{bucket}/{filename}"
-        Credentials: arn:aws:iam::381492149341:role/LabRole
+        Credentials: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
         RequestParameters:
           integration.request.path.bucket: method.request.path.bucket
           integration.request.path.filename: method.request.path.filename
@@ -284,14 +277,6 @@ Resources:
       StageName: hml
       RestApiId: !Ref RestApiUploadS3
       DeploymentId: !Ref ApiDeploymentHml
-      # MethodSettings:               -> logs detalhados caso precise
-      #   - ResourcePath: "/*"
-      #     HttpMethod: "*"
-      #     LoggingLevel: INFO
-      #     DataTraceEnabled: true
-      AccessLogSetting:
-        DestinationArn: !GetAtt ApiGatewayLogGroup.Arn
-        Format: "{\"requestId\":\"$context.requestId\",\"bucket\":\"$context.path.bucket\",\"filename\":\"$context.path.filename\",\"status\":\"$context.status\",\"message\":\"Upload successfully.\"}"
   ApiGatewayLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -309,7 +294,7 @@ Resources:
         S3Key: get_latest_csv.zip
       Timeout: 10
       MemorySize: 128
-      Role: arn:aws:iam::381492149341:role/LabRole
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
 
   LambdaInvokePermissionGetCsv:
     Type: AWS::Lambda::Permission
@@ -330,14 +315,14 @@ Resources:
         S3Key: trigger_raw_to_trusted.zip
       Timeout: 10
       MemorySize: 128
-      Role: arn:aws:iam::381492149341:role/LabRole  
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole  
   LambdaInvokePermissionS3Raw:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName: !Ref FunctionRawToTrusted
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
-      SourceArn: !Sub arn:aws:s3:::raw-bucket-381492149341
+      SourceArn: !Sub arn:aws:s3:::raw-bucket-${AWS::AccountId}
   
   FunctionTrustedToClient:
     Type: AWS::Lambda::Function
@@ -350,20 +335,20 @@ Resources:
         S3Key: trigger_trusted_to_client.zip
       Timeout: 10
       MemorySize: 128
-      Role: arn:aws:iam::381492149341:role/LabRole  
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole  
   LambdaInvokePermissionS3Trusted:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName: !Ref FunctionTrustedToClient
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
-      SourceArn: !Sub arn:aws:s3:::trusted-bucket-381492149341
+      SourceArn: !Sub arn:aws:s3:::trusted-bucket-${AWS::AccountId}
 
   RawBucket:
     Type: AWS::S3::Bucket
     DependsOn: LambdaInvokePermissionS3Raw
     Properties:
-      BucketName: !Sub "raw-bucket-${AWS::AccountId}"
+      BucketName: !Sub raw-bucket-${AWS::AccountId}
       Tags:
         - Key: Name
           Value: RawBucket
@@ -375,7 +360,7 @@ Resources:
     Type: AWS::S3::Bucket
     DependsOn: LambdaInvokePermissionS3Trusted
     Properties:
-      BucketName: !Sub "trusted-bucket-${AWS::AccountId}"
+      BucketName: !Sub trusted-bucket-${AWS::AccountId}
       Tags:
         - Key: Name
           Value: TrustedBucket
@@ -386,7 +371,63 @@ Resources:
   ClientBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "client-bucket-${AWS::AccountId}"
+      BucketName: !Sub client-bucket-${AWS::AccountId}
       Tags:
         - Key: Name
           Value: ClientBucket
+
+  GrafanaEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref Ec2KeyPairName
+      ImageId: ami-0fc5d935ebf8bc3bc
+      InstanceType: t2.micro
+      SubnetId: !Ref PublicSubnet
+      IamInstanceProfile: LabInstanceProfile
+      SecurityGroupIds:
+        - !Ref GrafanaSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub grafana-${Client}
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          apt-get update -y
+          apt-get upgrade -y
+
+          # Adiciona chave e repositório do Grafana
+          curl https://packages.grafana.com/gpg.key | sudo apt-key add -
+          echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+
+          apt-get update -y
+          apt-get install -y software-properties-common wget
+
+          # Baixa chave corretamente
+          wget -O /tmp/grafana.key https://packages.grafana.com/gpg.key
+          sudo apt-key add /tmp/grafana.key
+
+          # Instala Grafana
+          apt-get install grafana -y
+
+          # Inicia e habilita o serviço
+          systemctl start grafana-server
+          systemctl enable grafana-server
+
+          # Troca senha padrão
+          sleep 15
+          grafana-cli admin reset-admin-password urubu100
+
+  GrafanaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Permite acesso SSH e porta 3000 do Grafana"
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 0.0.0.0/0
