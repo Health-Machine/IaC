@@ -6,7 +6,7 @@ import io
 from datetime import datetime
 
 s3 = boto3.client('s3')
-TRUSTED_BUCKET = 'trusted-bucket-381492149341'
+TRUSTED_BUCKET = 'trusted-bucket-199917718936'
 
 def lambda_handler(event, context):
     # Buckets
@@ -18,18 +18,17 @@ def lambda_handler(event, context):
     try:
         # Lê o JSON do bucket de origem
         response = s3.get_object(Bucket=source_bucket, Key=key)
+        print('GET S3: ', response)
         raw_bytes = response['Body'].read()
-        
-        # Tenta decodificar com UTF-8, se falhar tenta Latin-1
+
         try:
             content = raw_bytes.decode('utf-8')
-            print("Arquivo decodificado com UTF-8")
         except UnicodeDecodeError:
             content = raw_bytes.decode('latin1')
-            print("Arquivo decodificado com Latin-1")
 
         # Converte o conteúdo para JSON
         data = json.loads(content)
+        print('Arquivo em JSON: ', data)
 
         # Garante que o JSON está em formato de lista
         if isinstance(data, dict):
@@ -56,7 +55,7 @@ def lambda_handler(event, context):
         # Se não houver linhas válidas, encerra
         if not valid_rows:
             print("Nenhum dado válido encontrado.")
-            return {"status": "sem dados válidos"}
+            return
 
         # Cria o CSV em memória
         output = io.StringIO()

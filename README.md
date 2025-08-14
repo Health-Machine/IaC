@@ -42,3 +42,13 @@ aws cloudformation delete-stack --stack-name HealthMachineStack
 ```bash
 aws cloudformation describe-stack-events --stack-name HealthMachineStack
 ```
+
+### Atualizar Lmabda
+
+```bash
+aws lambda update-function-code `
+  --function-name trigger_raw_to_trusted `
+  --s3-bucket setup-bucket-199917718936 `
+  --s3-key trigger_raw_to_trusted.zip
+
+```
