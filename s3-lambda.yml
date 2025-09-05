@@ -112,3 +112,7 @@ Resources:
       Tags:
         - Key: Name
           Value: ClientBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionClientToDynamo.Arn

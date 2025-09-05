@@ -49,6 +49,15 @@ aws cloudformation deploy `
    --parameter-overrides "file://s3-lambda.json"
 ```
 
+### Rodar a Stack Dynamo (dynamo.yml)
+
+```bash
+aws cloudformation deploy `
+   --template-file "dynamo.yml" `
+   --stack-name "DynamoHMStack" `
+   --capabilities "CAPABILITY_NAMED_IAM" `
+```
+
 ### Deletar a Stack
 
 ```bash
@@ -65,10 +74,9 @@ aws cloudformation describe-stack-events --stack-name HealthMachineStack
 
 ```bash
 aws lambda update-function-code `
-  --function-name trigger_raw_to_trusted `
+  --function-name trigger_client_to_dynamo `
   --s3-bucket setup-bucket-199917718936 `
-  --s3-key trigger_raw_to_trusted.zip
-
+  --s3-key trigger_client_to_dynamo.zip
 ```
 
 ## Remover arquivos S3

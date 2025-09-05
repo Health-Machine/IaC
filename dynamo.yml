@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  SensorTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "sensores-hm"
+      BillingMode: PAY_PER_REQUEST # on-demand
+      AttributeDefinitions:
+        - AttributeName: "fk_sensor"
+          AttributeType: "N"
+        - AttributeName: "data_captura"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "fk_sensor"
+          KeyType: "HASH"
+        - AttributeName: "data_captura"
+          KeyType: "RANGE"
+      SSESpecification: # criptografia habilitada por padrão
+        SSEEnabled: true
