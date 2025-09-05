@@ -1,0 +1,129 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  SetupBucket:
+    Type: String
+    Description: Nome do Bucket de Setup
+
+Resources:
+  RestApiUploadS3:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: "api-upload-s3"
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+      BinaryMediaTypes:
+        - application/json
+        - text/csv
+  ApiResourceBucket:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt RestApiUploadS3.RootResourceId
+      PathPart: "{bucket}"
+      RestApiId: !Ref RestApiUploadS3
+  ApiResourceFileName:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref ApiResourceBucket
+      PathPart: "{filename}"
+      RestApiId: !Ref RestApiUploadS3
+  ApiResourceCsv:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref ApiResourceBucket
+      PathPart: download-csv
+      RestApiId: !Ref RestApiUploadS3
+
+  ApiDeploymentHml:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - ApiPutMethod
+      - ApiGetMethod
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      StageName: hml
+
+  ApiPutMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      ResourceId: !Ref ApiResourceFileName
+      HttpMethod: PUT
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: PUT
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/{bucket}/{filename}"
+        Credentials: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
+        RequestParameters:
+          integration.request.path.bucket: method.request.path.bucket
+          integration.request.path.filename: method.request.path.filename
+          integration.request.header.Content-Type: method.request.header.Content-Type
+        PassthroughBehavior: WHEN_NO_MATCH
+        ContentHandling: CONVERT_TO_BINARY
+        IntegrationResponses:
+          - StatusCode: 200
+      RequestParameters:
+        method.request.path.bucket: true
+        method.request.path.filename: true
+        method.request.header.Content-Type: true
+      MethodResponses:
+        - StatusCode: 200
+
+  ApiGetMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+      ResourceId: !Ref ApiResourceCsv
+      HttpMethod: GET
+      AuthorizationType: NONE
+      RequestParameters:
+        method.request.path.bucket: true
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub
+        - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaArn}/invocations
+        - LambdaArn: !GetAtt GetLatestCsvFunction.Arn
+
+  ApiDeploymentHml:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - ApiPutMethod
+      - ApiGetMethod
+    Properties:
+      RestApiId: !Ref RestApiUploadS3
+
+  ApiStage:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      StageName: hml
+      RestApiId: !Ref RestApiUploadS3
+      DeploymentId: !Ref ApiDeploymentHml
+  ApiGatewayLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/apigateway/upload-s3-log
+      RetentionInDays: 7
+
+  GetLatestCsvFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: get_latest_csv
+      Runtime: python3.11
+      Handler: get_latest_csv.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: get_latest_csv.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
+
+  LambdaInvokePermissionGetCsv:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt GetLatestCsvFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${RestApiUploadS3}/*/GET/{bucket}/download-csv

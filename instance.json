@@ -30,9 +30,5 @@
   {
     "ParameterKey": "Ec2JupyterPassword",
     "ParameterValue": "urubu100"
-  },
-  {
-    "ParameterKey": "SetupBucket",
-    "ParameterValue": "setup-bucket-199917718936"
   }
 ]

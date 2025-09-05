@@ -19,16 +19,34 @@ aws cloudformation deploy `
 aws s3 cp ./lambda/setup s3://setup-bucket-199917718936/ --recursive
 ```
 
-### Rodar a Stack Principal (cloudformation.yml)
-
-Para criar ou atualizar a stack, execute o seguinte comando no terminal:
+### Rodar a Stack Instance (instance.yml)
 
 ```bash
 aws cloudformation deploy `
-   --template-file "cloudformation.yml" `
-   --stack-name "HealthMachineStack" `
+   --template-file "instance.yml" `
+   --stack-name "InstanceHMStack" `
    --capabilities "CAPABILITY_NAMED_IAM" `
-   --parameter-overrides "file://params.json"
+   --parameter-overrides "file://instance.json"
+```
+
+### Rodar a Stack Api (api.yml)
+
+```bash
+aws cloudformation deploy `
+   --template-file "api.yml" `
+   --stack-name "ApiHMStack" `
+   --capabilities "CAPABILITY_NAMED_IAM" `
+   --parameter-overrides "file://api.json"
+```
+
+### Rodar a Stack S3 e Lambda (s3-lambda.yml)
+
+```bash
+aws cloudformation deploy `
+   --template-file "s3-lambda.yml" `
+   --stack-name "S3LambdaHMStack" `
+   --capabilities "CAPABILITY_NAMED_IAM" `
+   --parameter-overrides "file://s3-lambda.json"
 ```
 
 ### Deletar a Stack
@@ -43,7 +61,7 @@ aws cloudformation delete-stack --stack-name HealthMachineStack
 aws cloudformation describe-stack-events --stack-name HealthMachineStack
 ```
 
-### Atualizar Lmabda
+### Atualizar Lambda
 
 ```bash
 aws lambda update-function-code `
@@ -51,4 +69,12 @@ aws lambda update-function-code `
   --s3-bucket setup-bucket-199917718936 `
   --s3-key trigger_raw_to_trusted.zip
 
+```
+
+## Remover arquivos S3
+
+```bash
+aws s3 rm s3://raw-bucket-199917718936/ --recursive
+aws s3 rm s3://trusted-bucket-199917718936/ --recursive
+aws s3 rm s3://client-bucket-199917718936/ --recursive
 ```

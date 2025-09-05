@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Global
+        Parameters:
+          - Client
+    ParameterLabels:
+      Client:
+        default: Cliente
+
+Parameters:
+  Client:
+    Type: String
+    Description: O nome do cliente
+    Default: health-machine
+  SetupBucket:
+    Type: String
+    Description: Nome do Bucket de Setup
+
+Resources:
+  FunctionRawToTrusted:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: trigger_raw_to_trusted
+      Runtime: python3.11
+      Handler: trigger_raw_to_trusted.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: trigger_raw_to_trusted.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
+  LambdaInvokePermissionS3Raw:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FunctionRawToTrusted
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub arn:aws:s3:::raw-bucket-${AWS::AccountId}
+
+  FunctionTrustedToClient:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: trigger_trusted_to_client
+      Runtime: python3.11
+      Handler: trigger_trusted_to_client.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: trigger_trusted_to_client.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
+  LambdaInvokePermissionS3Trusted:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FunctionTrustedToClient
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub arn:aws:s3:::trusted-bucket-${AWS::AccountId}
+
+  FunctionClientToDynamo:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: trigger_client_to_dynamo
+      Runtime: python3.11
+      Handler: trigger_client_to_dynamo.lambda_handler
+      Code:
+        S3Bucket: !Ref SetupBucket
+        S3Key: trigger_client_to_dynamo.zip
+      Timeout: 10
+      MemorySize: 128
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
+  LambdaInvokePermissionS3Client:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FunctionClientToDynamo
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub arn:aws:s3:::client-bucket-${AWS::AccountId}
+
+  RawBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Raw
+    Properties:
+      BucketName: !Sub raw-bucket-${AWS::AccountId}
+      Tags:
+        - Key: Name
+          Value: RawBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionRawToTrusted.Arn
+  TrustedBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: LambdaInvokePermissionS3Trusted
+    Properties:
+      BucketName: !Sub trusted-bucket-${AWS::AccountId}
+      Tags:
+        - Key: Name
+          Value: TrustedBucket
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FunctionTrustedToClient.Arn
+  ClientBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub client-bucket-${AWS::AccountId}
+      Tags:
+        - Key: Name
+          Value: ClientBucket

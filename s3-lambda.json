@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "Client",
+    "ParameterValue": "health-machine"
+  },
+  {
+    "ParameterKey": "SetupBucket",
+    "ParameterValue": "setup-bucket-199917718936"
+  }
+]
