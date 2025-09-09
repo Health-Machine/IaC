@@ -1,10 +1,19 @@
-import boto3, csv, uuid
+import boto3, csv
 import urllib.parse
 from decimal import Decimal
 
-TABLE_NAME = "sensores-hm"  
-dynamo = boto3.resource("dynamodb").Table(TABLE_NAME)
 s3 = boto3.client("s3")
+
+TABLES = {
+    "1": "sensor-corrente",
+    "2": "sensor-tensao",
+    "3": "sensor-temperatura",
+    "4": "sensor-vibracao",
+    "5": "sensor-pressao",
+    "6": "sensor-frequencia"
+}
+
+dynamo = boto3.resource("dynamodb")
 
 def lambda_handler(event, context):
     try:
@@ -19,19 +28,30 @@ def lambda_handler(event, context):
             print(f"Ignorando arquivo não-CSV: {source_key}")
             return {"status": "ignorado", "arquivo": source_key}
 
-        # Lê o arquivo CSV do bucket client
+        # Lê o arquivo CSV do bucket
         obj = s3.get_object(Bucket=source_bucket, Key=source_key)
         csv_content = obj["Body"].read().decode("utf-8").splitlines()
         reader = csv.DictReader(csv_content)
 
         registros = 0
         for row in reader:
+            fk_sensor = str(row["fk_sensor"])
+
+            # Verifica se o sensor tem tabela associada
+            if fk_sensor not in TABLES:
+                print(f"fk_sensor {fk_sensor} não tem tabela associada. Ignorado.")
+                continue
+
+            tabela_destino = TABLES[fk_sensor]
+            tabela = dynamo.Table(tabela_destino)
+
+            # Monta o item 
             item = {
-                "fk_sensor": Decimal(str(row["fk_sensor"])),
-                "valor": Decimal(str(row["valor"])),
                 "data_captura": row["data_captura"],
+                "valor": Decimal(str(row["valor"]))
             }
-            dynamo.put_item(Item=item)
+
+            tabela.put_item(Item=item)
             registros += 1
 
         print(f"Processado {registros} registros do arquivo {source_key}")
