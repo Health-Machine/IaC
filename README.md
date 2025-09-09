@@ -55,7 +55,7 @@ aws cloudformation deploy `
 aws cloudformation deploy `
    --template-file "dynamo.yml" `
    --stack-name "DynamoHMStack" `
-   --capabilities "CAPABILITY_NAMED_IAM" `
+   --capabilities "CAPABILITY_NAMED_IAM"
 ```
 
 ### Deletar a Stack
