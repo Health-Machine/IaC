@@ -67,11 +67,11 @@ Resources:
       ParentId: !GetAtt ApiRestHealthMachine.RootResourceId
       PathPart: "{bucket}"
       RestApiId: !Ref ApiRestHealthMachine
-  ApiResourceFileName:
+  ApiResourceFileProxy:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId: !Ref ApiResourceBucket
-      PathPart: "{filename}"
+      PathPart: "{proxy+}"
       RestApiId: !Ref ApiRestHealthMachine
   ApiResourceCsv:
     Type: AWS::ApiGateway::Resource
@@ -99,17 +99,17 @@ Resources:
     Type: AWS::ApiGateway::Method
     Properties:
       RestApiId: !Ref ApiRestHealthMachine
-      ResourceId: !Ref ApiResourceFileName
+      ResourceId: !Ref ApiResourceFileProxy
       HttpMethod: PUT
       AuthorizationType: NONE
       Integration:
         Type: AWS
         IntegrationHttpMethod: PUT
-        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/{bucket}/{filename}"
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:s3:path/{bucket}/{proxy}"
         Credentials: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
         RequestParameters:
           integration.request.path.bucket: method.request.path.bucket
-          integration.request.path.filename: method.request.path.filename
+          integration.request.path.proxy: method.request.path.proxy
           integration.request.header.Content-Type: method.request.header.Content-Type
         PassthroughBehavior: WHEN_NO_MATCH
         ContentHandling: CONVERT_TO_BINARY
@@ -117,7 +117,7 @@ Resources:
           - StatusCode: 200
       RequestParameters:
         method.request.path.bucket: true
-        method.request.path.filename: true
+        method.request.path.proxy: true
         method.request.header.Content-Type: true
       MethodResponses:
         - StatusCode: 200

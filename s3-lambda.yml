@@ -93,6 +93,11 @@ Resources:
         LambdaConfigurations:
           - Event: s3:ObjectCreated:*
             Function: !GetAtt FunctionRawToTrusted.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: sensor/
   TrustedBucket:
     Type: AWS::S3::Bucket
     DependsOn: LambdaInvokePermissionS3Trusted
