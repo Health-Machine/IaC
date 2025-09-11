@@ -110,6 +110,11 @@ Resources:
         LambdaConfigurations:
           - Event: s3:ObjectCreated:*
             Function: !GetAtt FunctionTrustedToClient.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: sensor/
   ClientBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -121,3 +126,8 @@ Resources:
         LambdaConfigurations:
           - Event: s3:ObjectCreated:*
             Function: !GetAtt FunctionClientToDynamo.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: sensor/

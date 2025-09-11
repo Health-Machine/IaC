@@ -93,7 +93,7 @@ def lambda_handler(event, context):
                 "body": json.dumps({
                     "sensor_id": sensor_id,
                     "table": table_name,
-                    "data_time": ultimo_registro
+                    "ultimo_registro": ultimo_registro
                 }, default=decimal_default)
             }
 

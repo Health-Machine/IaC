@@ -1,4 +1,5 @@
-import boto3, csv
+import boto3
+import csv
 import urllib.parse
 from decimal import Decimal
 
@@ -23,6 +24,9 @@ def lambda_handler(event, context):
             event["Records"][0]["s3"]["object"]["key"], encoding="utf-8"
         )
 
+        print(f"Processando arquivo: {source_key} (bucket: {source_bucket})")
+
+
         # Verifica se é um arquivo CSV
         if not source_key.endswith(".csv"):
             print(f"Ignorando arquivo não-CSV: {source_key}")
@@ -30,12 +34,24 @@ def lambda_handler(event, context):
 
         # Lê o arquivo CSV do bucket
         obj = s3.get_object(Bucket=source_bucket, Key=source_key)
-        csv_content = obj["Body"].read().decode("utf-8").splitlines()
+        csv_content = obj["Body"].read().decode("utf-8-sig").splitlines()  # <- utf-8-sig remove BOM
         reader = csv.DictReader(csv_content)
+
+        print(f"Colunas do CSV: {reader.fieldnames}")
 
         registros = 0
         for row in reader:
-            fk_sensor = str(row["fk_sensor"])
+            # Ignora linhas vazias
+            if not row:
+                continue
+
+            # Pega o fk_sensor de forma segura
+            fk_sensor = row.get("fk_sensor")
+            if not fk_sensor:
+                print(f"Linha ignorada, fk_sensor ausente: {row}")
+                continue
+
+            fk_sensor = str(fk_sensor).strip()  # remove espaços
 
             # Verifica se o sensor tem tabela associada
             if fk_sensor not in TABLES:
@@ -45,10 +61,18 @@ def lambda_handler(event, context):
             tabela_destino = TABLES[fk_sensor]
             tabela = dynamo.Table(tabela_destino)
 
-            # Monta o item 
+            # Pega valor e data de forma segura
+            valor = row.get("valor")
+            data_captura = row.get("data_captura")
+
+            if valor is None or data_captura is None:
+                print(f"Linha ignorada, dados incompletos: {row}")
+                continue
+
+            # Monta o item para o DynamoDB
             item = {
-                "data_captura": row["data_captura"],
-                "valor": Decimal(str(row["valor"]))
+                "data_captura": data_captura.strip(),
+                "valor": Decimal(str(valor).strip())
             }
 
             tabela.put_item(Item=item)
