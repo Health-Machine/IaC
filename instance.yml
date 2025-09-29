@@ -134,103 +134,103 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${AWS::StackName}-${Client}
-  Instance:
-    DependsOn: [RouteTableAssociationPublicSubnet, InstanceSecurityGroup]
-    Type: AWS::EC2::Instance
-    Properties:
-      KeyName: !Ref Ec2KeyPairName
-      ImageId: !Ref Ec2AmiId
-      InstanceType: t3.small
-      SubnetId: !Ref PublicSubnet
-      IamInstanceProfile: EMR_EC2_DefaultRole
-      SecurityGroupIds:
-        - !Ref InstanceSecurityGroup
-      Tags:
-        - Key: Name
-          Value: !Sub jupyter-${Client}
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          amazon-linux-extras install java-openjdk11 -y
-          curl -O https://dlcdn.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
-          tar xzf spark-3.2.1-bin-hadoop3.2.tgz -C /usr/local --owner root --group root --no-same-owner
-          rm -rf spark-3.2.1-bin-hadoop3.2.tgz
-          mv /usr/local/spark-3.2.1-bin-hadoop3.2 /usr/local/spark
-          pip3 install pyspark --no-cache-dir
-          pip3 install jupyterlab --no-cache-dir
-          touch /lib/systemd/system/jupyter.service
-          echo "[Unit]" >> /lib/systemd/system/jupyter.service
-          echo "Description=Jupyter Notebook" >> /lib/systemd/system/jupyter.service
-          echo "[Service]" >> /lib/systemd/system/jupyter.service
-          echo "Type=simple" >> /lib/systemd/system/jupyter.service
-          echo "ExecStart=/opt/jupyter/script/start.sh" >> /lib/systemd/system/jupyter.service
-          echo "Restart=always" >> /lib/systemd/system/jupyter.service
-          echo "RestartSec=10" >> /lib/systemd/system/jupyter.service
-          echo "[Install]" >> /lib/systemd/system/jupyter.service
-          echo "WantedBy=multi-user.target" >> /lib/systemd/system/jupyter.service
-          mkdir /opt/jupyter
-          mkdir /opt/jupyter/notebook
-          mkdir /opt/jupyter/script
-          touch /opt/jupyter/script/start.sh
-          echo '#!/bin/bash' >> /opt/jupyter/script/start.sh
-          echo '/usr/bin/python3 -m notebook --NotebookApp.notebook_dir=/opt/jupyter/notebook --NotebookApp.password=$(/usr/bin/python3 -c "from notebook.auth import passwd; print(passwd(\"${Ec2JupyterPassword}\"))")  --allow-root --ip 0.0.0.0 --port 80' >> /opt/jupyter/script/start.sh
-          chmod +x /opt/jupyter/script/start.sh
-          systemctl daemon-reload
-          systemctl start jupyter
-          systemctl enable jupyter
+  # Instance:
+  #   DependsOn: [RouteTableAssociationPublicSubnet, InstanceSecurityGroup]
+  #   Type: AWS::EC2::Instance
+  #   Properties:
+  #     KeyName: !Ref Ec2KeyPairName
+  #     ImageId: !Ref Ec2AmiId
+  #     InstanceType: t3.small
+  #     SubnetId: !Ref PublicSubnet
+  #     IamInstanceProfile: EMR_EC2_DefaultRole
+  #     SecurityGroupIds:
+  #       - !Ref InstanceSecurityGroup
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub jupyter-${Client}
+  #     UserData:
+  #       Fn::Base64: !Sub |
+  #         #!/bin/bash
+  #         amazon-linux-extras install java-openjdk11 -y
+  #         curl -O https://dlcdn.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
+  #         tar xzf spark-3.2.1-bin-hadoop3.2.tgz -C /usr/local --owner root --group root --no-same-owner
+  #         rm -rf spark-3.2.1-bin-hadoop3.2.tgz
+  #         mv /usr/local/spark-3.2.1-bin-hadoop3.2 /usr/local/spark
+  #         pip3 install pyspark --no-cache-dir
+  #         pip3 install jupyterlab --no-cache-dir
+  #         touch /lib/systemd/system/jupyter.service
+  #         echo "[Unit]" >> /lib/systemd/system/jupyter.service
+  #         echo "Description=Jupyter Notebook" >> /lib/systemd/system/jupyter.service
+  #         echo "[Service]" >> /lib/systemd/system/jupyter.service
+  #         echo "Type=simple" >> /lib/systemd/system/jupyter.service
+  #         echo "ExecStart=/opt/jupyter/script/start.sh" >> /lib/systemd/system/jupyter.service
+  #         echo "Restart=always" >> /lib/systemd/system/jupyter.service
+  #         echo "RestartSec=10" >> /lib/systemd/system/jupyter.service
+  #         echo "[Install]" >> /lib/systemd/system/jupyter.service
+  #         echo "WantedBy=multi-user.target" >> /lib/systemd/system/jupyter.service
+  #         mkdir /opt/jupyter
+  #         mkdir /opt/jupyter/notebook
+  #         mkdir /opt/jupyter/script
+  #         touch /opt/jupyter/script/start.sh
+  #         echo '#!/bin/bash' >> /opt/jupyter/script/start.sh
+  #         echo '/usr/bin/python3 -m notebook --NotebookApp.notebook_dir=/opt/jupyter/notebook --NotebookApp.password=$(/usr/bin/python3 -c "from notebook.auth import passwd; print(passwd(\"${Ec2JupyterPassword}\"))")  --allow-root --ip 0.0.0.0 --port 80' >> /opt/jupyter/script/start.sh
+  #         chmod +x /opt/jupyter/script/start.sh
+  #         systemctl daemon-reload
+  #         systemctl start jupyter
+  #         systemctl enable jupyter
 
-  GrafanaEC2Instance:
-    Type: AWS::EC2::Instance
-    Properties:
-      KeyName: !Ref Ec2KeyPairName
-      ImageId: ami-0fc5d935ebf8bc3bc
-      InstanceType: t2.micro
-      SubnetId: !Ref PublicSubnet
-      IamInstanceProfile: LabInstanceProfile
-      SecurityGroupIds:
-        - !Ref GrafanaSecurityGroup
-      Tags:
-        - Key: Name
-          Value: !Sub grafana-${Client}
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          apt-get update -y
-          apt-get upgrade -y
+  # GrafanaEC2Instance:
+  #   Type: AWS::EC2::Instance
+  #   Properties:
+  #     KeyName: !Ref Ec2KeyPairName
+  #     ImageId: ami-0fc5d935ebf8bc3bc
+  #     InstanceType: t2.micro
+  #     SubnetId: !Ref PublicSubnet
+  #     IamInstanceProfile: LabInstanceProfile
+  #     SecurityGroupIds:
+  #       - !Ref GrafanaSecurityGroup
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub grafana-${Client}
+  #     UserData:
+  #       Fn::Base64: !Sub |
+  #         #!/bin/bash
+  #         apt-get update -y
+  #         apt-get upgrade -y
 
-          # Adiciona chave e repositório do Grafana
-          curl https://packages.grafana.com/gpg.key | sudo apt-key add -
-          echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+  #         # Adiciona chave e repositório do Grafana
+  #         curl https://packages.grafana.com/gpg.key | sudo apt-key add -
+  #         echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
 
-          apt-get update -y
-          apt-get install -y software-properties-common wget
+  #         apt-get update -y
+  #         apt-get install -y software-properties-common wget
 
-          # Baixa chave corretamente
-          wget -O /tmp/grafana.key https://packages.grafana.com/gpg.key
-          sudo apt-key add /tmp/grafana.key
+  #         # Baixa chave corretamente
+  #         wget -O /tmp/grafana.key https://packages.grafana.com/gpg.key
+  #         sudo apt-key add /tmp/grafana.key
 
-          # Instala Grafana
-          apt-get install grafana -y
+  #         # Instala Grafana
+  #         apt-get install grafana -y
 
-          # Inicia e habilita o serviço
-          systemctl start grafana-server
-          systemctl enable grafana-server
+  #         # Inicia e habilita o serviço
+  #         systemctl start grafana-server
+  #         systemctl enable grafana-server
 
-          # Troca senha padrão
-          sleep 15
-          grafana-cli admin reset-admin-password urubu100
+  #         # Troca senha padrão
+  #         sleep 15
+  #         grafana-cli admin reset-admin-password urubu100
 
-  GrafanaSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: "Permite acesso SSH e porta 3000 do Grafana"
-      VpcId: !Ref Vpc
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 3000
-          ToPort: 3000
-          CidrIp: 0.0.0.0/0
+  # GrafanaSecurityGroup:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: "Permite acesso SSH e porta 3000 do Grafana"
+  #     VpcId: !Ref Vpc
+  #     SecurityGroupIngress:
+  #       - IpProtocol: tcp
+  #         FromPort: 22
+  #         ToPort: 22
+  #         CidrIp: 0.0.0.0/0
+  #       - IpProtocol: tcp
+  #         FromPort: 3000
+  #         ToPort: 3000
+  #         CidrIp: 0.0.0.0/0

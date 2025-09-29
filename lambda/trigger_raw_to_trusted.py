@@ -6,7 +6,7 @@ import io
 from datetime import datetime
 
 s3 = boto3.client('s3')
-TRUSTED_BUCKET = 'trusted-bucket-199917718936'
+TRUSTED_BUCKET = 'trusted-bucket-891377383993'
 
 def lambda_handler(event, context):
     for record in event['Records']:
