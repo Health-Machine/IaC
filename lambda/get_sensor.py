@@ -58,16 +58,54 @@ def lambda_handler(event, context):
                 "body": json.dumps({"error": "Nenhum dado encontrado para esse sensor"})
             }
 
-        # Caso IDs 11,22,33... → retorna todos os registros p/ gráfico
-        if sensor_id in ["11", "22", "33", "44", "55", "66"]:
+        # Lógica de Modo Grafana (agora para 1, 11, 22, 33...)
+        if sensor_id in ["1", "11", "22", "33", "44", "55", "66"]:
             datapoints = []
             for item in itens:
                 try:
+                    # --- INÍCIO DA CORREÇÃO DE DATA ---
+                    # Esta parte agora trata datas com e sem segundos
                     valor = float(item["valor"])
-                    timestamp = int(datetime.strptime(item["data_captura"], "%Y-%m-%d %H:%M").timestamp() * 1000)
-                    datapoints.append([valor, timestamp])
+                    data_captura_str = item["data_captura"]
+                    
+                    try:
+                        # 1. Tenta converter o formato COM segundos (ex: "2025-10-29 16:45:00")
+                        dt = datetime.strptime(data_captura_str, "%Y-%m-%d %H:%M:%S")
+                    except ValueError:
+                        # 2. Se falhar, tenta converter o formato SEM segundos (ex: "2025-10-29 16:46")
+                        dt = datetime.strptime(data_captura_str, "%Y-%m-%d %H:%M")
+                    
+                    timestamp = int(dt.timestamp() * 1000)
+  
+                    # Verifica se estamos tratando os sensores especiais (1 ou 11)
+                    if sensor_id in ["1", "11"]:
+                        # Cria a lista de datapoint com os dois valores base
+                        datapoint_list = [valor, timestamp]
+                        
+                        # Adiciona as colunas extras do CSV
+                        datapoint_list.append(item.get("alerta_sobrecarga", None))
+                        datapoint_list.append(item.get("carga_media_trabalho_amps", None))
+                        datapoint_list.append(item.get("confiabilidade_perc_oee", None))
+                        datapoint_list.append(item.get("estado_operacional", None))
+                        datapoint_list.append(item.get("fk_sensor", None))
+                        datapoint_list.append(item.get("mtbf_minutos", None))
+                        datapoint_list.append(item.get("mttr_minutos", None))
+                        datapoint_list.append(item.get("perc_tempo_desligada", None))
+                        datapoint_list.append(item.get("perc_tempo_em_carga", None))
+                        datapoint_list.append(item.get("perc_tempo_ociosa", None))
+                        datapoint_list.append(item.get("total_eventos_sobrecarga", None))
+                        
+                        datapoints.append(datapoint_list)
+                        
+                    else:
+                        # Sensores 22, 33, 44, etc. continuam como antes
+                        datapoints.append([valor, timestamp])
+                 
+                        
                 except Exception as e:
-                    print(f"Erro ao converter item {item}: {e}")
+                    # Se um item falhar na conversão (mesmo com a data corrigida),
+                    # ele será logado e pulado, evitando que a Lambda quebre.
+                    print(f"Erro ao processar item {item}: {e}")
 
             # Ordena pelo tempo
             datapoints.sort(key=lambda x: x[1])
@@ -84,7 +122,7 @@ def lambda_handler(event, context):
                 "body": json.dumps(grafana_response, default=decimal_default)
             }
 
-        # Caso IDs 1–6 → retorna só o último registro
+        # Lógica de "Último Registro" (agora só para 2, 3, 4, 5, 6)
         else:
             ultimo_registro = max(itens, key=lambda x: x["data_captura"])
 
