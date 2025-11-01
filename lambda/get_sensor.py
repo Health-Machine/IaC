@@ -59,7 +59,7 @@ def lambda_handler(event, context):
             }
 
         # Lógica de Modo Grafana (agora para 1, 11, 22, 33...)
-        if sensor_id in ["11", "22", "33", "44", "55", "66"]:
+        if sensor_id in ["1", "11", "22", "33", "44", "55", "66"]:
             datapoints = []
             for item in itens:
                 try:
