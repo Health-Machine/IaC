@@ -4,8 +4,9 @@ from decimal import Decimal
 from datetime import datetime
 import statistics
 
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource("dynamodb")
 
+# Tabelas / nome legível
 SENSOR_TABLES = {
     "1": ("sensor-corrente", "corrente"),
     "2": ("sensor-frequencia", "frequencia"),
@@ -13,12 +14,50 @@ SENSOR_TABLES = {
     "4": ("sensor-temperatura", "temperatura"),
     "5": ("sensor-tensao", "tensao"),
     "6": ("sensor-vibracao", "vibracao"),
+    # ids para timeseries "completo" (mantém o comportamento antigo do 11)
     "11": ("sensor-corrente", "corrente"),
     "22": ("sensor-frequencia", "frequencia"),
     "33": ("sensor-pressao", "pressao"),
     "44": ("sensor-temperatura", "temperatura"),
     "55": ("sensor-tensao", "tensao"),
-    "66": ("sensor-vibracao", "vibracao")
+    "66": ("sensor-vibracao", "vibracao"),
+}
+
+# Campos que compõem o datapoint "completo" (ordem usada no JSON grande)
+FULL_DP_FIELDS = [
+    "valor",                     # index 0
+    "data_captura",              # index 1 (timestamp)
+    "alerta_sobrecarga",        # index 2
+    "carga_media_trabalho_amps",# index 3
+    "confiabilidade_perc_oee",  # index 4
+    "estado_operacional",       # index 5
+    "fk_sensor",                # index 6
+    "mtbf_minutos",             # index 7
+    "mttr_minutos",             # index 8
+    "perc_tempo_desligada",     # index 9
+    "perc_tempo_em_carga",      # index 10
+    "perc_tempo_ociosa",        # index a
+    "total_eventos_sobrecarga"  # index 12
+]
+
+# Mapeamento de novos endpoints métricos (id -> campo do item a retornar)
+# 11 fica para o FULL (completo). A partir de 12 retornamos métricas separadas.
+METRIC_ENDPOINTS = {
+    "12": ("confiabilidade_perc_oee", "OEE"),    # index 4
+    "13": ("mtbf_minutos", "MTBF"),              # index 7
+    "14": ("mttr_minutos", "MTTR"),              # index 8
+    "15": ("perc_tempo_ociosa", "OCIOSA_PERCENT"),   # index 11
+    "16": ("perc_tempo_desligada", "PARADA_PERCENT"),# index 9
+    "17": ("total_eventos_sobrecarga", "EVENTOS_SOBRECARGA"), # index 12
+    "18": ("estado_operacional", "ESTADO_OPERACIONAL"), # será mapeado para numérico
+    # você pode adicionar mais aqui (19, 20...) se quiser separar outras colunas
+}
+
+# Mapeamento simples de estado_operacional -> número (se quiser alterar, ajuste aqui)
+ESTADO_MAP = {
+    "Em Carga": 1.0,
+    "Parada": 0.0,
+    "Ociosa": 0.5
 }
 
 def decimal_default(obj):
@@ -26,142 +65,131 @@ def decimal_default(obj):
         return float(obj)
     raise TypeError
 
-def parse_dt_any(v):
-    """
-    Aceita:
-     - int/float/Decimal (assume ms se > 1e12, senão assume seconds e multiplica por 1000)
-     - string numérica (mesma regra)
-     - string 'YYYY-MM-DD HH:MM:SS' ou 'YYYY-MM-DD HH:MM'
-    Retorna datetime ou None.
-    """
-    if v is None:
+def try_parse_datetime_str(s):
+    """Tenta converter string em datetime usando alguns formatos conhecidos."""
+    if not isinstance(s, str):
         return None
-    # números (Decimal, int, float)
-    if isinstance(v, (int, float, Decimal)):
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
         try:
-            iv = int(v)
-            # se já está em ms (>= 1e12 ~ ano 2001) -> ms
-            if iv > 10**12:
-                return datetime.fromtimestamp(iv / 1000.0)
-            # senão, considera segundos
-            return datetime.fromtimestamp(iv)
+            return datetime.strptime(s, fmt)
         except Exception:
-            return None
-    # strings
-    if isinstance(v, str):
-        s = v.strip()
-        if s.isdigit():
-            try:
-                iv = int(s)
-                if iv > 10**12:
-                    return datetime.fromtimestamp(iv / 1000.0)
-                return datetime.fromtimestamp(iv)
-            except Exception:
-                return None
-        # tenta formatos conhecidos
-        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
-            try:
-                return datetime.strptime(s, fmt)
-            except Exception:
-                continue
+            continue
+    # tenta interpretar como inteiro string (epoch ms)
+    try:
+        ival = int(s)
+        # se valor > 10**12 provavelmente é ms, converter para dt
+        if ival > 10**12:
+            return datetime.fromtimestamp(ival / 1000.0)
+    except Exception:
+        pass
     return None
 
-def to_ms_from_any(v):
-    dt = parse_dt_any(v)
-    if dt:
-        return int(dt.timestamp() * 1000)
-    # se for número e parse_dt_any não retornou (caso raro), tenta converter direto:
-    if isinstance(v, (int, float, Decimal)):
-        iv = int(v)
-        if iv > 10**12:
-            return iv
-        return iv * 1000
-    if isinstance(v, str) and v.isdigit():
-        iv = int(v)
-        if iv > 10**12:
-            return iv
-        return iv * 1000
+def to_epoch_ms(raw):
+    """Retorna epoch ms inteiro de uma entrada que pode ser:
+       - int/float epoch ms
+       - string timestamp (yyyy-mm-dd HH:MM[:SS]) ou string com epoch ms
+    """
+    if raw is None:
+        return None
+    # se for Decimal (Dynamo) converte
+    if isinstance(raw, Decimal):
+        raw = float(raw)
+    # número -> assume epoch ms se for grande
+    if isinstance(raw, (int, float)):
+        # se número em segundos (<= 10^12?) -> detect minimal cutoff
+        if raw > 10**12:
+            return int(raw)
+        # se for segundos (ex: 1690000000) -> converte para ms
+        if raw > 10**9:
+            return int(raw * 1000)
+        # caso improvável, tenta converter assumindo segundos
+        return int(raw * 1000)
+    # string -> tenta parse
+    if isinstance(raw, str):
+        # se a string é número
+        if raw.isdigit():
+            ival = int(raw)
+            if ival > 10**12:
+                return ival
+            if ival > 10**9:
+                return int(ival * 1000)
+        dt = try_parse_datetime_str(raw)
+        if dt:
+            return int(dt.timestamp() * 1000)
     return None
+
+def build_full_datapoint(item):
+    """Constroi a lista completa na ordem definida em FULL_DP_FIELDS.
+       Se algum campo estiver ausente, coloca None (mas chamamos o filtro a seguir para pular linhas incompletas quando necessário).
+    """
+    dp = []
+    for f in FULL_DP_FIELDS:
+        if f == "data_captura":
+            dp.append(to_epoch_ms(item.get(f)))
+        else:
+            v = item.get(f)
+            # Decimal -> float
+            if isinstance(v, Decimal):
+                v = float(v)
+            dp.append(v)
+    return dp
 
 def lambda_handler(event, context):
     try:
-        sensor_id = event.get('pathParameters', {}).get('sensor_id')
+        sensor_id = event.get("pathParameters", {}).get("sensor_id")
         if not sensor_id:
-            return {
-                "statusCode": 400,
-                "body": json.dumps({"error": "Parâmetro sensor_id é obrigatório"})
-            }
+            return {"statusCode": 400, "body": json.dumps({"error": "Parâmetro sensor_id é obrigatório"})}
 
-        # --- Função auxiliar para ler vibração (usada pelos 666* especiais) ---
+        # --- Funções especiais herdadas do código do seu amigo (vibração analytics) ---
         def get_vibration_data():
             table = dynamodb.Table("sensor-vibracao")
             response = table.scan()
             itens = response.get("Items", [])
-            # filtra apenas itens com data_captura parseável
-            itens = [x for x in itens if parse_dt_any(x.get("data_captura"))]
-            return sorted(itens, key=lambda x: to_ms_from_any(x["data_captura"]))
+            # filtra itens sem data válida
+            itens = [x for x in itens if to_epoch_ms(x.get("data_captura")) is not None]
+            return sorted(itens, key=lambda x: to_epoch_ms(x["data_captura"]))
 
-        # --- Blocos 666* (mantidos do código do seu amigo) ---
+        # 666, 6666, 66666, 666666, 6666666, 66666666 -> mantém como estava
         if sensor_id == "666":
             itens = get_vibration_data()
             if not itens:
                 return {"statusCode": 404, "body": json.dumps({"error": "Nenhum dado encontrado"})}
-
             ultimo_restart, maior_gap = None, 0
             for i in range(1, len(itens)):
-                dt_atual = parse_dt_any(itens[i]["data_captura"])
-                dt_anterior = parse_dt_any(itens[i - 1]["data_captura"])
+                dt_atual = to_epoch_ms(itens[i]["data_captura"])
+                dt_anterior = to_epoch_ms(itens[i - 1]["data_captura"])
                 if dt_atual and dt_anterior:
-                    diff = (dt_atual - dt_anterior).total_seconds() / 60
+                    diff = (dt_atual - dt_anterior) / 1000.0 / 60.0
                     if diff > 20:
                         ultimo_restart = dt_atual
                         maior_gap = diff
-
             if ultimo_restart:
-                return {
-                    "statusCode": 200,
-                    "body": json.dumps({
-                        "ultimo_restart": ultimo_restart.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        "gap_minutos": round(maior_gap, 2)
-                    })
-                }
-            return {
-                "statusCode": 200,
-                "body": json.dumps({"mensagem": "Nenhum salto de tempo > 20 min"})
-            }
+                return {"statusCode": 200, "body": json.dumps({"ultimo_restart": datetime.utcfromtimestamp(ultimo_restart/1000).strftime("%Y-%m-%dT%H:%M:%SZ"), "gap_minutos": round(maior_gap, 2)})}
+            return {"statusCode": 200, "body": json.dumps({"mensagem": "Nenhum salto de tempo > 20 min"})}
 
-        elif sensor_id == "6666":
+        if sensor_id == "6666":
             itens = get_vibration_data()
             if not itens:
                 return {"statusCode": 404, "body": json.dumps({"error": "Sem dados"})}
-
-            total_operando = 0
-            total_parado = 0
+            total_operando = 0.0
+            total_parado = 0.0
             for i in range(1, len(itens)):
                 atual = float(itens[i].get("valor", 0) or 0)
                 anterior = float(itens[i - 1].get("valor", 0) or 0)
-                dt_atual = parse_dt_any(itens[i]["data_captura"])
-                dt_anterior = parse_dt_any(itens[i - 1]["data_captura"])
+                dt_atual = to_epoch_ms(itens[i]["data_captura"])
+                dt_anterior = to_epoch_ms(itens[i - 1]["data_captura"])
                 if dt_atual and dt_anterior:
-                    diff_min = (dt_atual - dt_anterior).total_seconds() / 60
+                    diff_min = (dt_atual - dt_anterior) / 1000.0 / 60.0
                     if anterior != 0 or atual != 0:
                         total_operando += diff_min
                     else:
                         total_parado += diff_min
+            return {"statusCode": 200, "body": json.dumps({"tempo_operando_min": round(total_operando, 2), "tempo_parado_min": round(total_parado, 2)})}
 
-            return {
-                "statusCode": 200,
-                "body": json.dumps({
-                    "tempo_operando_min": round(total_operando, 2),
-                    "tempo_parado_min": round(total_parado, 2)
-                })
-            }
-
-        elif sensor_id == "66666":
+        if sensor_id == "66666":
             itens = get_vibration_data()
             if not itens:
                 return {"statusCode": 404, "body": json.dumps({"error": "Sem dados"})}
-
             ciclos = 0
             ativo = False
             for item in itens:
@@ -171,162 +199,145 @@ def lambda_handler(event, context):
                 elif valor == 0 and ativo:
                     ativo = False
                     ciclos += 1
-
             return {"statusCode": 200, "body": json.dumps({"ciclos_concluidos": ciclos})}
 
-        elif sensor_id == "666666":
+        if sensor_id == "666666":
             itens = get_vibration_data()
             hoje = datetime.now().date()
-            valores_hoje = [
-                float(x.get("valor", 0) or 0)
-                for x in itens
-                if parse_dt_any(x.get("data_captura")) and parse_dt_any(x.get("data_captura")).date() == hoje
-            ]
-
+            valores_hoje = [float(x.get("valor", 0)) for x in itens if datetime.utcfromtimestamp(to_epoch_ms(x["data_captura"])/1000).date() == hoje]
             if not valores_hoje:
                 return {"statusCode": 404, "body": json.dumps({"error": "Sem dados de hoje"})}
-
             media = sum(valores_hoje) / len(valores_hoje)
             pico = max(valores_hoje)
-            return {
-                "statusCode": 200,
-                "body": json.dumps({"media_vibracao": round(media, 3), "pico_vibracao": pico})
-            }
+            return {"statusCode": 200, "body": json.dumps({"media_vibracao": round(media, 3), "pico_vibracao": pico})}
 
-        elif sensor_id == "6666666":
+        if sensor_id == "6666666":
             itens = get_vibration_data()
-            valores = [float(x.get("valor", 0) or 0) for x in itens]
+            valores = [float(x.get("valor", 0)) for x in itens]
             if len(valores) < 2:
                 return {"statusCode": 200, "body": json.dumps({"desvio_padrao": 0})}
-
             desvio = statistics.stdev(valores)
-            return {
-                "statusCode": 200,
-                "body": json.dumps({"desvio_padrao": round(desvio, 4)})
-            }
+            return {"statusCode": 200, "body": json.dumps({"desvio_padrao": round(desvio, 4)})}
 
-        elif sensor_id == "66666666":
+        if sensor_id == "66666666":
             itens = get_vibration_data()
             if not itens:
                 return {"statusCode": 404, "body": json.dumps({"error": "Sem dados"})}
-
             max_item = max(itens, key=lambda x: float(x.get("valor", 0) or 0))
-            dt = parse_dt_any(max_item.get("data_captura"))
-            return {
-                "statusCode": 200,
-                "body": json.dumps({
-                    "pico_vibracao": float(max_item.get("valor", 0) or 0),
-                    "hora_pico": dt.strftime("%Y-%m-%dT%H:%M:%SZ") if dt else None
-                })
-            }
+            dt = to_epoch_ms(max_item["data_captura"])
+            return {"statusCode": 200, "body": json.dumps({"pico_vibracao": float(max_item.get("valor", 0)), "hora_pico": datetime.utcfromtimestamp(dt/1000).strftime("%Y-%m-%dT%H:%M:%SZ")})}
 
-        # --- CASO GERAL ---
+        # --- Caso geral: sensores mapeados ---
         table_info = SENSOR_TABLES.get(sensor_id)
-        if not table_info:
-            return {"statusCode": 400, "body": json.dumps({"error": "Sensor_id inválido"})}
+        if not table_info and sensor_id not in METRIC_ENDPOINTS and sensor_id != "11":
+            return {"statusCode": 400, "body": json.dumps({"error": f"Sensor_id {sensor_id} inválido"})}
 
-        table_name, metric_name = table_info
-        table = dynamodb.Table(table_name)
-        response = table.scan()
-        itens = response.get("Items", [])
+        # Se for um endpoint métrico separado (12,13,...)
+        if sensor_id in METRIC_ENDPOINTS:
+            campo, alias = METRIC_ENDPOINTS[sensor_id]
+            # Para endpoints métricos, precisamos saber de qual tabela pegar os itens:
+            # se for por convenção começamos pela tabela equivalente do "grupo" (ex.: 12/13... serão derivados da mesma tabela do 11)
+            # assumimos que a origem é a mesma do 11 para cada tipo (ex.: 12 deriva do sensor-corrente)
+            # mapa simples: pega table do "11" correspondendo ao grupo (ex.: 12 -> sensor-corrente)
+            # vamos derivar a tabela a partir de table_info de "11"
+            base_table_info = SENSOR_TABLES.get("11")
+            if base_table_info is None:
+                return {"statusCode": 500, "body": json.dumps({"error": "Configuração base ausente"})}
+            table_name, metric_name = base_table_info
+            table = dynamodb.Table(table_name)
+            response = table.scan()
+            itens = response.get("Items", [])
+            if not itens:
+                return {"statusCode": 404, "body": json.dumps({"error": "Nenhum dado encontrado para esse sensor"})}
 
-        if not itens:
-            return {"statusCode": 404, "body": json.dumps({"error": "Nenhum dado encontrado"})}
-
-        # --- Para os grafana_ids que devolvem série temporal completa (11,22,...) ---
-        if sensor_id in ["11", "22", "33", "44", "55", "66"]:
             datapoints = []
             for item in itens:
                 try:
-                    # valor (campo 'valor')
-                    raw_val = item.get("valor")
-                    if raw_val is None:
-                        # pula itens sem valor
+                    ts = to_epoch_ms(item.get("data_captura"))
+                    if ts is None:
                         continue
-                    valor = float(raw_val)
-
-                    # timestamp (data_captura) -> milissegundos
-                    ts_ms = to_ms_from_any(item.get("data_captura"))
-                    if ts_ms is None:
-                        # pula itens sem timestamp válido
-                        continue
-
-                    # --- Para o caso específico do sensor 11: manter colunas extras (mesma ordem do seu JSON)
-                    if sensor_id == "11":
-                        # Filtragem que você mencionou: evita linhas incompletas (trava dos nulls)
-                        if (
-                            item.get("confiabilidade_perc_oee") is None
-                            or item.get("mtbf_minutos") is None
-                            or item.get("mttr_minutos") is None
-                        ):
-                            # pula este registro (era o que evitava uma série com muitos nulls)
+                    # estado_operacional especial -> mapeia para número
+                    if campo == "estado_operacional":
+                        raw = item.get(campo)
+                        if raw is None:
                             continue
-
-                        # montar a linha na ordem esperada (preserve as posições para os JSONPath)
-                        row = [
-                            valor,
-                            ts_ms,
-                            item.get("alerta_sobrecarga", None),
-                            item.get("carga_media_trabalho_amps", None),
-                            item.get("confiabilidade_perc_oee", None),
-                            item.get("estado_operacional", None),
-                            item.get("fk_sensor", None),
-                            item.get("mtbf_minutos", None),
-                            item.get("mttr_minutos", None),
-                            item.get("perc_tempo_desligada", None),
-                            item.get("perc_tempo_em_carga", None),
-                            item.get("perc_tempo_ociosa", None),
-                            item.get("total_eventos_sobrecarga", None),
-                        ]
-                        # garantir que valor e timestamp existem (dupla checagem)
-                        if row[0] is None or row[1] is None:
-                            continue
-                        datapoints.append(row)
+                        # se for numérico já usa, se string tenta mapear
+                        if isinstance(raw, (int, float, Decimal)):
+                            val = float(raw)
+                        else:
+                            val = ESTADO_MAP.get(str(raw), None)
+                            if val is None:
+                                # pula se não consegue mapear para número
+                                continue
                     else:
-                        # outros sensores 22/33/... -> formato simples [valor, timestamp]
-                        datapoints.append([valor, ts_ms])
-
+                        raw = item.get(campo)
+                        if raw is None:
+                            continue
+                        val = float(raw) if isinstance(raw, (int, float, Decimal, str)) and str(raw) != "" else None
+                        if val is None:
+                            continue
+                    datapoints.append([val, ts])
                 except Exception as e:
-                    print(f"Erro ao processar item {item}: {e}")
+                    print(f"Erro item métrica {item}: {e}")
+                    continue
+            datapoints.sort(key=lambda x: x[1])
+            return {"statusCode": 200, "body": json.dumps([{"target": alias, "datapoints": datapoints}], default=decimal_default)}
+
+        # Se for o endpoint "11" -> retorna o JSON grande (datapoints completos)
+        if sensor_id == "11":
+            table_name, metric_name = SENSOR_TABLES["11"]
+            table = dynamodb.Table(table_name)
+            response = table.scan()
+            itens = response.get("Items", [])
+            if not itens:
+                return {"statusCode": 404, "body": json.dumps({"error": "Nenhum dado encontrado para esse sensor"})}
+
+            datapoints = []
+            for item in itens:
+                try:
+                    # Pula registros incompletos (mesma lógica que você mencionou antes)
+                    # garante que os campos críticos existam para compor o array completo
+                    if (
+                        item.get("confiabilidade_perc_oee") is None
+                        or item.get("mtbf_minutos") is None
+                        or item.get("mttr_minutos") is None
+                    ):
+                        # pula linha incompleta
+                        continue
+
+                    dp = build_full_datapoint(item)
+                    # se timestamp inválido pula
+                    if dp[1] is None:
+                        continue
+                    datapoints.append(dp)
+                except Exception as e:
+                    print(f"Erro ao montar full datapoint para item {item}: {e}")
                     continue
 
-            # ordena por timestamp
             datapoints.sort(key=lambda x: x[1])
+            grafana_response = [{"target": metric_name, "datapoints": datapoints}]
+            return {"statusCode": 200, "body": json.dumps(grafana_response, default=decimal_default)}
 
-            grafana_response = [
-                {
-                    "target": metric_name,
-                    "datapoints": datapoints
-                }
-            ]
-            return {
-                "statusCode": 200,
-                "body": json.dumps(grafana_response, default=decimal_default)
-            }
+        # Caso: sensores simples (1,2,3,4,5,6) -> retorna último registro (mesmo comportamento antigo)
+        if sensor_id in ["1", "2", "3", "4", "5", "6"]:
+            table_name, metric_name = SENSOR_TABLES[sensor_id]
+            table = dynamodb.Table(table_name)
+            response = table.scan()
+            itens = response.get("Items", [])
+            if not itens:
+                return {"statusCode": 404, "body": json.dumps({"error": "Nenhum dado encontrado para esse sensor"})}
+            # pega último registro por campo data_captura (usando epoch ms)
+            ultima = max(itens, key=lambda x: (to_epoch_ms(x.get("data_captura")) or 0))
+            val = float(ultima.get("valor", 0) or 0)
+            ts = to_epoch_ms(ultima.get("data_captura"))
+            if ts is None:
+                # se não tiver ts, tenta retornar somente valor
+                return {"statusCode": 200, "body": json.dumps({"target": metric_name, "datapoints": [[val, None]]}, default=decimal_default)}
+            return {"statusCode": 200, "body": json.dumps({"target": metric_name, "datapoints": [[val, ts]]}, default=decimal_default)}
 
-        # --- Para sensores 1..6: apenas o último registro (comportamento original) ---
-        # usa max por data_captura (comparando com parse_dt_any para evitar strings estranhas)
-        def key_dt(item):
-            dt = parse_dt_any(item.get("data_captura"))
-            if dt:
-                return dt
-            # fallback: tenta converter numeric, senão string
-            return datetime.min
-
-        ultimo = max(itens, key=key_dt)
-        valor = float(ultimo.get("valor", 0) or 0)
-        ts_ms = to_ms_from_any(ultimo.get("data_captura"))
-        # se timestamp for None, tenta ignorar e deixar sem timestamp — mas mantemos ms quando possível
-        datapoint = [[valor, ts_ms]] if ts_ms is not None else [[valor, None]]
-
-        return {
-            "statusCode": 200,
-            "body": json.dumps({
-                "target": metric_name,
-                "datapoints": datapoint
-            }, default=decimal_default)
-        }
+        # fallback (não esperado)
+        return {"statusCode": 400, "body": json.dumps({"error": "Rota não tratada"})}
 
     except Exception as e:
-        print(f"[ERRO] {e}")
+        print(f"[ERRO LAMBDA] {e}")
         return {"statusCode": 500, "body": json.dumps({"error": str(e)})}
