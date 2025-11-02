@@ -2,230 +2,257 @@ import boto3
 import csv
 import urllib.parse
 from decimal import Decimal
-import io # Necessário para ler o CSV em memória
-import json # Necessário para converter para o Dynamo
+import io
+import json
+import os
+import traceback
 
-# --- [ Dependências que exigem um Lambda Layer ] ---
+# --- Dependências que exigem Lambda Layer (ou runtime com libs) ---
 import pandas as pd
 import numpy as np
-# ----------------------------------------------------
+# -----------------------------------------------------------------
 
 s3 = boto3.client("s3")
+dynamo = boto3.resource("dynamodb")
 
+# Mapeamento fk_sensor -> tabela do DynamoDB
 TABLES = {
     "1": "sensor-corrente",
     "2": "sensor-tensao",
     "3": "sensor-temperatura",
     "4": "sensor-vibracao",
     "5": "sensor-pressao",
-    "6": "sensor-frequencia"
+    "6": "sensor-frequencia",
 }
 
-dynamo = boto3.resource("dynamodb")
+# -----------------------------
+# Configs de análise (Pandas)
+# -----------------------------
+COLUNA_VALOR = "valor"
+COLUNA_TEMPO = "data_captura"
 
-# --- [ INÍCIO DAS FUNÇÕES DE ANÁLISE (copiadas do seu script) ] ---
-
-# --- Configurações de Análise (movidas para cá) ---
-COLUNA_VALOR = 'valor'
-COLUNA_TEMPO = 'data_captura'
 LIMITE_CORRENTE_DESLIGADA = 0.5
-LIMITE_CORRENTE_TRABALHO  = 10.0
+LIMITE_CORRENTE_TRABALHO = 10.0
 LIMITE_CORRENTE_SOBRECARGA = 50.0
 
-def definir_estado_operacional(corrente):
-    """Classifica a corrente em um dos três estados operacionais."""
+
+def definir_estado_operacional(corrente: float) -> str:
+    """Classifica a corrente em três estados."""
     if corrente < LIMITE_CORRENTE_DESLIGADA:
-        return 'Desligada'
+        return "Desligada"
     elif corrente >= LIMITE_CORRENTE_TRABALHO:
-        return 'Em Carga'
-    else:
-        return 'Ociosa'
+        return "Em Carga"
+    return "Ociosa"
 
-def calcular_indicadores(df):
-    """Função principal para calcular todas as métricas."""
-    
+
+def calcular_indicadores(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Análise completa (Pandas) para o sensor 1.
+    Retorna o mesmo DataFrame acrescido das métricas calculadas por linha.
+    """
     print("Iniciando análise completa (Pandas)...")
-    
-    # [ 2. PREPARAÇÃO DOS DADOS ]
-    df[COLUNA_TEMPO] = pd.to_datetime(df[COLUNA_TEMPO])
+    df = df.copy()
+
+    # Garantir colunas mínimas
+    for col in (COLUNA_TEMPO, COLUNA_VALOR, "fk_sensor"):
+        if col not in df.columns:
+            raise ValueError(f"CSV sem coluna obrigatória: {col}")
+
+    # 1) Tempo
+    df[COLUNA_TEMPO] = pd.to_datetime(df[COLUNA_TEMPO], errors="coerce")
+    df = df.dropna(subset=[COLUNA_TEMPO])
     df = df.sort_values(by=COLUNA_TEMPO).reset_index(drop=True)
-    df['duracao_segundos_linha'] = df[COLUNA_TEMPO].diff().dt.total_seconds()
-    df['duracao_segundos_linha'].fillna(df['duracao_segundos_linha'].mean(), inplace=True)
 
-    # [ 3. MÉTRICAS POR LINHA ]
-    df['estado_operacional'] = df[COLUNA_VALOR].apply(definir_estado_operacional)
-    df['alerta_sobrecarga'] = df[COLUNA_VALOR] > LIMITE_CORRENTE_SOBRECARGA
+    # 2) Duração da linha (em segundos)
+    df["duracao_segundos_linha"] = df[COLUNA_TEMPO].diff().dt.total_seconds()
+    if df["duracao_segundos_linha"].isna().all():
+        # fallback caso só exista 1 linha
+        df["duracao_segundos_linha"] = 60.0
+    else:
+        mean_gap = df["duracao_segundos_linha"].dropna().mean()
+        df["duracao_segundos_linha"] = df["duracao_segundos_linha"].fillna(mean_gap if pd.notna(mean_gap) else 60.0)
 
-    # [ 4. CÁLCULO DAS MÉTRICAS AGREGADAS ]
-    
-    # a) Eficiência (OEE)
-    tempo_total_segundos = df['duracao_segundos_linha'].sum()
-    tempo_por_estado = df.groupby('estado_operacional')['duracao_segundos_linha'].sum()
-    perc_em_carga  = (tempo_por_estado.get('Em Carga', 0) / tempo_total_segundos) * 100
-    perc_ociosa    = (tempo_por_estado.get('Ociosa', 0) / tempo_total_segundos) * 100
-    perc_desligada = (tempo_por_estado.get('Desligada', 0) / tempo_total_segundos) * 100
+    # 3) Estados e alertas por linha
+    df[COLUNA_VALOR] = pd.to_numeric(df[COLUNA_VALOR], errors="coerce").fillna(0.0)
+    df["estado_operacional"] = df[COLUNA_VALOR].apply(definir_estado_operacional)
+    df["alerta_sobrecarga"] = df[COLUNA_VALOR] > LIMITE_CORRENTE_SOBRECARGA
 
-    # b) Confiabilidade (MTBF/MTTR)
-    df['estado_mtbf'] = np.where(df['estado_operacional'] == 'Em Carga', 'UP', 'DOWN')
-    df['mudou_estado_mtbf'] = df['estado_mtbf'].shift() != df['estado_mtbf']
-    df.loc[0, 'mudou_estado_mtbf'] = True
-    df['group_id'] = df['mudou_estado_mtbf'].cumsum()
-    
-    duracao_por_evento = df.groupby('group_id').agg(
-        estado=('estado_mtbf', 'first'),
-        duracao_total_segundos=('duracao_segundos_linha', 'sum')
+    # 4) Agregações para OEE/Confiabilidade
+    tempo_total = df["duracao_segundos_linha"].sum()
+    tempo_por_estado = df.groupby("estado_operacional")["duracao_segundos_linha"].sum()
+
+    perc_em_carga = (tempo_por_estado.get("Em Carga", 0.0) / tempo_total * 100) if tempo_total > 0 else 0.0
+    perc_ociosa = (tempo_por_estado.get("Ociosa", 0.0) / tempo_total * 100) if tempo_total > 0 else 0.0
+    perc_desligada = (tempo_por_estado.get("Desligada", 0.0) / tempo_total * 100) if tempo_total > 0 else 0.0
+
+    # MTBF/MTTR: alternância de "UP" (Em Carga) vs "DOWN" (outros)
+    df["estado_mtbf"] = np.where(df["estado_operacional"] == "Em Carga", "UP", "DOWN")
+    df["mudou_estado_mtbf"] = df["estado_mtbf"].shift().ne(df["estado_mtbf"])
+    df.loc[df.index.min(), "mudou_estado_mtbf"] = True
+    df["group_id"] = df["mudou_estado_mtbf"].cumsum()
+
+    duracao_por_evento = df.groupby("group_id").agg(
+        estado=("estado_mtbf", "first"),
+        duracao_total_segundos=("duracao_segundos_linha", "sum"),
     )
-    periodos_uptime_seg = duracao_por_evento[duracao_por_evento['estado'] == 'UP']['duracao_total_segundos']
-    periodos_downtime_seg = duracao_por_evento[duracao_por_evento['estado'] == 'DOWN']['duracao_total_segundos']
-    
-    mtbf_segundos = periodos_uptime_seg.mean()
-    mttr_segundos = periodos_downtime_seg.mean()
-    mtbf_final_minutos = (mtbf_segundos / 60) if pd.notna(mtbf_segundos) else 0
-    mttr_final_minutos = (mttr_segundos / 60) if pd.notna(mttr_segundos) else 0
 
-    total_uptime = periodos_uptime_seg.sum()
-    total_downtime = periodos_downtime_seg.sum()
-    confiabilidade_final_perc = (total_uptime / (total_uptime + total_downtime)) * 100 if (total_uptime + total_downtime) > 0 else 100.0
+    uptime_seg = duracao_por_evento.loc[duracao_por_evento["estado"] == "UP", "duracao_total_segundos"]
+    downtime_seg = duracao_por_evento.loc[duracao_por_evento["estado"] == "DOWN", "duracao_total_segundos"]
 
-    # c) Preditiva (Carga Média)
-    df_em_carga = df[df['estado_operacional'] == 'Em Carga']
-    carga_media_trabalho_amps = df_em_carga[COLUNA_VALOR].mean() if not df_em_carga.empty else 0
+    mtbf_min = (uptime_seg.mean() / 60.0) if len(uptime_seg) else 0.0
+    mttr_min = (downtime_seg.mean() / 60.0) if len(downtime_seg) else 0.0
 
-    # d) Alertas (Contagem Total)
-    total_eventos_sobrecarga = df['alerta_sobrecarga'].sum()
+    total_uptime = uptime_seg.sum()
+    total_downtime = downtime_seg.sum()
+    confiab_perc = (total_uptime / (total_uptime + total_downtime) * 100) if (total_uptime + total_downtime) > 0 else 100.0
 
-    # [ 5. ADICIONAR MÉTRICAS AGREGADAS ]
-    df['mtbf_minutos'] = mtbf_final_minutos
-    df['mttr_minutos'] = mttr_final_minutos
-    df['confiabilidade_perc_oee'] = confiabilidade_final_perc
-    df['perc_tempo_em_carga'] = perc_em_carga
-    df['perc_tempo_ociosa'] = perc_ociosa
-    df['perc_tempo_desligada'] = perc_desligada
-    df['carga_media_trabalho_amps'] = carga_media_trabalho_amps
-    df['total_eventos_sobrecarga'] = total_eventos_sobrecarga
+    # Preditiva: carga média quando em carga
+    carga_media_trabalho_amps = df.loc[df["estado_operacional"] == "Em Carga", COLUNA_VALOR].mean()
+    if pd.isna(carga_media_trabalho_amps):
+        carga_media_trabalho_amps = 0.0
 
-    # [ 6. LIMPEZA ]
-    colunas_para_remover = ['duracao_segundos_linha', 'estado_mtbf', 'mudou_estado_mtbf', 'group_id']
-    df = df.drop(columns=colunas_para_remover)
-    df.fillna(0, inplace=True)
-    
+    total_eventos_sobrecarga = int(df["alerta_sobrecarga"].sum())
+
+    # 5) Gravar métricas por linha (constantes ao período analisado)
+    df["mtbf_minutos"] = float(mtbf_min)
+    df["mttr_minutos"] = float(mttr_min)
+    df["confiabilidade_perc_oee"] = float(confiab_perc)
+    df["perc_tempo_em_carga"] = float(perc_em_carga)
+    df["perc_tempo_ociosa"] = float(perc_ociosa)
+    df["perc_tempo_desligada"] = float(perc_desligada)
+    df["carga_media_trabalho_amps"] = float(carga_media_trabalho_amps)
+    df["total_eventos_sobrecarga"] = int(total_eventos_sobrecarga)
+
+    # 6) Limpeza de colunas temporárias
+    df = df.drop(columns=["duracao_segundos_linha", "estado_mtbf", "mudou_estado_mtbf", "group_id"])
+
+    # 7) Segurança: sem NaN para subir ao Dynamo
+    df = df.fillna(0)
+
     print("Análise completa (Pandas) concluída.")
     return df
 
-# --- [ FIM DAS FUNÇÕES DE ANÁLISE ] ---
-
 
 def lambda_handler(event, context):
+    """
+    Evento esperado: S3:ObjectCreated (arquivo CSV).
+    Lê o CSV do bucket/origem e grava nas tabelas do Dynamo mapeadas em TABLES.
+    - fk_sensor == "1": processa via Pandas e grava itens completos
+    - fk_sensor != "1": grava linha a linha (data_captura, valor)
+    """
+    source_bucket = None
+    source_key = None
+    registros = 0
+
     try:
-        # Extrai informações do evento S3
+        # 1) Extrai info do evento S3
         source_bucket = event["Records"][0]["s3"]["bucket"]["name"]
-        source_key = urllib.parse.unquote_plus(
-            event["Records"][0]["s3"]["object"]["key"], encoding="utf-8"
-        )
+        source_key = urllib.parse.unquote_plus(event["Records"][0]["s3"]["object"]["key"], encoding="utf-8")
         print(f"Processando arquivo: {source_key} (bucket: {source_bucket})")
 
-        # Verifica se é um arquivo CSV
         if not source_key.endswith(".csv"):
             print(f"Ignorando arquivo não-CSV: {source_key}")
             return {"status": "ignorado", "arquivo": source_key}
 
-        # Lê o arquivo CSV do bucket para a memória
+        # 2) Lê CSV em memória
         obj = s3.get_object(Bucket=source_bucket, Key=source_key)
         csv_content = obj["Body"].read().decode("utf-8-sig")
-        
-        # Cria um buffer de texto para 'espiar' e 'reler' o arquivo
+
         csv_buffer = io.StringIO(csv_content)
-        
-        # Espia a primeira linha para descobrir o fk_sensor
         reader_peek = csv.DictReader(csv_buffer)
+
         try:
             first_row = next(reader_peek)
-            sensor_id = first_row.get("fk_sensor", "").strip()
         except StopIteration:
-            print("Arquivo CSV vazio. Ignorando.")
+            print("CSV vazio. Nada a fazer.")
             return {"status": "ignorado", "arquivo": source_key}
-        
-        # Reinicia o buffer para o início
+
+        sensor_id = (first_row.get("fk_sensor") or "").strip()
+        if not sensor_id:
+            raise ValueError("fk_sensor ausente na primeira linha do CSV.")
+
+        # reset do buffer para reler o arquivo
         csv_buffer.seek(0)
-        
-        
-        # --- [ INÍCIO DA LÓGICA DE DIVISÃO ] ---
-        
-        registros = 0
-        
+
         if sensor_id == "1":
-            # --- CAMINHO 1: SENSOR DE CORRENTE ---
-            print("Sensor '1' detectado. Rodando análise completa com Pandas...")
-            
-            # 1. Carrega o CSV no Pandas
+            # -------------------------
+            # CAMINHO: sensor 1 (Pandas)
+            # -------------------------
+            print("Sensor '1' detectado. Rodando análise com Pandas...")
+
             df_bruto = pd.read_csv(csv_buffer)
-            
-            # 2. Executa a análise completa
-            df_completo = calcular_indicadores(df_bruto)
-            
-            # 3. Salva no DynamoDB
-            tabela = dynamo.Table(TABLES[sensor_id])
-            
-            # Converte o DataFrame para uma lista de dicts
-            itens_para_enviar = df_completo.to_dict('records')
-            
-            for item in itens_para_enviar:
-                # Converte floats/bools/ints para o formato DynamoDB
-                # Usa json.dumps/loads para converter float -> Decimal
-                item_dynamo = json.loads(json.dumps(item), parse_float=Decimal)
-                
-                # Converte 'alerta_sobrecarga' de True/False para Booleano do Dynamo
-                item_dynamo['alerta_sobrecarga'] = bool(item_dynamo.get('alerta_sobrecarga'))
-                
-                # Garante que fk_sensor é string (Pandas pode ter convertido para int)
-                item_dynamo['fk_sensor'] = str(item_dynamo['fk_sensor'])
-                
-                # Converte data_captura de volta para string (Pandas converteu para datetime)
-                item_dynamo['data_captura'] = str(item['data_captura'])
+
+            # Guard rails mínimos para tipos
+            if COLUNA_VALOR in df_bruto.columns:
+                df_bruto[COLUNA_VALOR] = pd.to_numeric(df_bruto[COLUNA_VALOR], errors="coerce")
+
+            df_final = calcular_indicadores(df_bruto)
+
+            # 🔧 Conversão garantida de datetime -> str (evita 'Timestamp is not JSON serializable')
+            if COLUNA_TEMPO in df_final.columns:
+                df_final[COLUNA_TEMPO] = df_final[COLUNA_TEMPO].astype(str)
+
+            # Envio ao Dynamo
+            table_name = TABLES[sensor_id]
+            tabela = dynamo.Table(table_name)
+
+            for item in df_final.to_dict("records"):
+                # Converte para tipos aceitos pelo Dynamo:
+                # - default=str: se sobrar qualquer tipo estranho, vira string (ex. Timestamp)
+                # - parse_float=Decimal: garante Decimal para floats
+                item_dynamo = json.loads(json.dumps(item, default=str), parse_float=Decimal)
+
+                # Ajuste de tipos críticos
+                item_dynamo["alerta_sobrecarga"] = bool(item_dynamo.get("alerta_sobrecarga", False))
+                item_dynamo["fk_sensor"] = str(item_dynamo.get("fk_sensor", "1"))
+
+                # data_captura já está string
+                if COLUNA_TEMPO in item_dynamo and item_dynamo[COLUNA_TEMPO] is None:
+                    # fallback (não deveria acontecer após astype(str))
+                    item_dynamo[COLUNA_TEMPO] = ""
 
                 tabela.put_item(Item=item_dynamo)
                 registros += 1
 
         else:
-            # --- CAMINHO 2: OUTROS SENSORES (LÓGICA ORIGINAL) ---
+            # -------------------------------------------
+            # CAMINHO: demais sensores (lógica row-by-row)
+            # -------------------------------------------
             print(f"Sensor '{sensor_id}' detectado. Rodando lógica original (row-by-row)...")
-            
-            # Recria o reader no buffer reiniciado
-            reader = csv.DictReader(csv_buffer) 
-            
+            if sensor_id not in TABLES:
+                raise ValueError(f"fk_sensor {sensor_id} não mapeado em TABLES.")
+
+            reader = csv.DictReader(csv_buffer)
+            table_name = TABLES[sensor_id]
+            tabela = dynamo.Table(table_name)
+
             for row in reader:
-                # (Esta é a sua lógica original, preservada 100%)
                 if not row:
                     continue
-                
-                fk_sensor_row = row.get("fk_sensor", "").strip()
-                if not fk_sensor_row:
-                    print(f"Linha ignorada, fk_sensor ausente: {row}")
+
+                fk_sensor_row = (row.get("fk_sensor") or "").strip()
+                if not fk_sensor_row or fk_sensor_row not in TABLES:
+                    print(f"Linha ignorada (fk_sensor inválido): {row}")
                     continue
-                
-                if fk_sensor_row not in TABLES:
-                    print(f"fk_sensor {fk_sensor_row} não tem tabela associada. Ignorado.")
-                    continue
-                
-                tabela_destino = TABLES[fk_sensor_row]
-                tabela = dynamo.Table(tabela_destino)
 
                 valor = row.get("valor")
                 data_captura = row.get("data_captura")
 
                 if valor is None or data_captura is None:
-                    print(f"Linha ignorada, dados incompletos: {row}")
+                    print(f"Linha ignorada (dados incompletos): {row}")
                     continue
 
-                item = {
-                    "data_captura": data_captura.strip(),
-                    "valor": Decimal(str(valor).strip())
-                }
+                try:
+                    item = {
+                        "data_captura": str(data_captura).strip(),
+                        "valor": Decimal(str(valor).strip()),
+                    }
+                except Exception as conv_err:
+                    print(f"Falha convertendo linha -> Decimal: {row} | err: {conv_err}")
+                    continue
 
                 tabela.put_item(Item=item)
                 registros += 1
-
-        # --- [ FIM DA LÓGICA DE DIVISÃO ] ---
 
         print(f"Processado {registros} registros do arquivo {source_key}")
         return {
@@ -236,6 +263,9 @@ def lambda_handler(event, context):
 
     except Exception as e:
         print(f"Erro ao processar arquivo {source_key}: {e}")
-        import traceback
-        traceback.print_exc() # Imprime o stack trace completo no CloudWatch
-        raise e
+        traceback.print_exc()
+        return {
+            "status": "erro",
+            "arquivo_processado": source_key,
+            "mensagem": str(e),
+        }
