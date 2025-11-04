@@ -16,7 +16,7 @@ aws cloudformation deploy `
 ### Subir os arquivos no Bucket
 
 ```bash
-aws s3 cp ./lambda/setup s3://setup-bucket-199917718936/ --recursive
+aws s3 cp ./lambda/setup s3://setup-bucket-891377383993/ --recursive
 ```
 
 ### Rodar a Stack Instance (instance.yml)
@@ -75,14 +75,14 @@ aws cloudformation describe-stack-events --stack-name HealthMachineStack
 ```bash
 aws lambda update-function-code `
   --function-name trigger_client_to_dynamo `
-  --s3-bucket setup-bucket-199917718936 `
+  --s3-bucket setup-bucket-891377383993 `
   --s3-key trigger_client_to_dynamo.zip
 ```
 
 ## Remover arquivos S3
 
 ```bash
-aws s3 rm s3://raw-bucket-199917718936/ --recursive
-aws s3 rm s3://trusted-bucket-199917718936/ --recursive
-aws s3 rm s3://client-bucket-199917718936/ --recursive
+aws s3 rm s3://raw-bucket-891377383993/ --recursive
+aws s3 rm s3://trusted-bucket-891377383993/ --recursive
+aws s3 rm s3://client-bucket-891377383993/ --recursive
 ```

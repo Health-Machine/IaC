@@ -55,19 +55,21 @@ def raw_to_trusted(source_bucket, key):
 
             try:
                 data_dt = datetime.strptime(data_captura, "%Y-%m-%d %H:%M:%S")
-                data_str = data_dt.strftime("%Y-%m-%d %H:%M")
+                dia_captura = data_dt.strftime("%Y-%m-%d")
+                hora_captura = data_dt.strftime("%H:%M:%S")
             except ValueError:
                 print(f"Formato de data inválido em {data_captura}, arquivo: {key}")
                 continue
 
             valid_rows.append({
-                "sensor_1": row.get("sensor_1"),
-                "sensor_2": row.get("sensor_2"),
-                "sensor_3": row.get("sensor_3"),
-                "sensor_4": row.get("sensor_4"),
-                "sensor_5": row.get("sensor_5"),
-                "sensor_6": row.get("sensor_6"),
-                "data_captura": data_str
+                "corrente": row.get("sensor_1"),
+                "tensao": row.get("sensor_2"),
+                "temperatura": row.get("sensor_3"),
+                "vibracao": row.get("sensor_4"),
+                "pressao": row.get("sensor_5"),
+                "frequencia": row.get("sensor_6"),
+                "dia_captura": dia_captura,
+                "hora_captura": hora_captura
             })
 
         if not valid_rows:
@@ -77,7 +79,8 @@ def raw_to_trusted(source_bucket, key):
         # Cria o CSV em memória
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=[
-            "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "data_captura"
+            "corrente", "tensao", "temperatura", "vibracao", "pressao", "frequencia",
+            "dia_captura", "hora_captura"
         ])
         writer.writeheader()
         writer.writerows(valid_rows)
@@ -102,11 +105,45 @@ def raw_to_trusted(source_bucket, key):
 
 def trusted_to_client(key):
     try:
-        sensor_1()
-        sensor_2()
-        sensor_3()
-        sensor_4()
-        sensor_5()
-        sensor_6()
+        csv_key = key.replace('.json', '.csv')
+
+        for func in [corrente, tensao, temperatura, vibracao, pressao, frequencia]:
+            try:
+                func()
+            except Exception as e:
+                print(f"Erro na função {func.__name__} message={e}")
+
+        # Copia o CSV do bucket trusted para o bucket client
+        copy_source = {
+            'Bucket': TRUSTED_BUCKET,
+            'Key': csv_key
+        }
+
+        s3.copy_object(
+            CopySource=copy_source,
+            Bucket=CLIENT_BUCKET,
+            Key=csv_key,
+            ContentType='text/csv'
+        )
+
+        print(f"CSV copiado com sucesso para o bucket '{CLIENT_BUCKET}' como '{csv_key}'")
     except Exception as e:
         print(f"function=trusted_to_client_error file={key} message={e}")
+
+def corrente():
+    pass
+
+def tensao():
+    pass
+
+def temperatura():
+    pass
+
+def vibracao():
+    pass
+
+def pressao():
+    pass
+
+def frequencia():
+    pass
