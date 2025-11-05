@@ -135,8 +135,74 @@ def trusted_to_client(key):
         print(f"function=trusted_to_client_error file={key} message={e}")
 
 def corrente(df):
-     
+    print("→ Calculando métricas de corrente...")
 
+    LIMITE_DESLIGADA = 0.5
+    LIMITE_TRABALHO = 10.0
+    LIMITE_SOBRECARGA = 50.0
+
+    df['data_captura'] = pd.to_datetime(df['dia_captura'] + ' ' + df['hora_captura'])
+    df = df.sort_values(by='data_captura').reset_index(drop=True)
+
+    def definir_estado(c):
+        if c < LIMITE_DESLIGADA:
+            return "Desligada"
+        elif c >= LIMITE_TRABALHO:
+            return "Em Carga"
+        else:
+            return "Ociosa"
+
+    df['estado_operacional'] = df['corrente'].apply(definir_estado)
+    df['alerta_sobrecarga'] = df['corrente'] > LIMITE_SOBRECARGA
+    df['duracao_segundos'] = df['data_captura'].diff().dt.total_seconds()
+    df['duracao_segundos'].fillna(df['duracao_segundos'].mean(), inplace=True)
+
+    tempo_total = df['duracao_segundos'].sum()
+    tempo_por_estado = df.groupby('estado_operacional')['duracao_segundos'].sum()
+    perc_em_carga = (tempo_por_estado.get('Em Carga', 0) / tempo_total) * 100
+    perc_ociosa = (tempo_por_estado.get('Ociosa', 0) / tempo_total) * 100
+    perc_desligada = (tempo_por_estado.get('Desligada', 0) / tempo_total) * 100
+
+    df['estado_mtbf'] = np.where(df['estado_operacional'] == 'Em Carga', 'UP', 'DOWN')
+    df['mudou_estado'] = df['estado_mtbf'].shift() != df['estado_mtbf']
+    df.loc[0, 'mudou_estado'] = True
+    df['grupo'] = df['mudou_estado'].cumsum()
+
+    duracao_eventos = df.groupby('grupo').agg(
+        estado=('estado_mtbf', 'first'),
+        duracao_total=('duracao_segundos', 'sum')
+    )
+
+    uptime = duracao_eventos[duracao_eventos['estado'] == 'UP']['duracao_total']
+    downtime = duracao_eventos[duracao_eventos['estado'] == 'DOWN']['duracao_total']
+
+    mtbf_minutos = (uptime.mean() / 60) if not uptime.empty else 0
+    mttr_minutos = (downtime.mean() / 60) if not downtime.empty else 0
+
+    total_uptime = uptime.sum()
+    total_downtime = downtime.sum()
+
+    confiabilidade_perc = (
+        (total_uptime / (total_uptime + total_downtime)) * 100
+        if (total_uptime + total_downtime) > 0
+        else 100
+    )
+
+    df_carga = df[df['estado_operacional'] == 'Em Carga']
+    carga_media_trabalho_amps = df_carga['corrente'].mean() if not df_carga.empty else 0
+    total_eventos_sobrecarga = df['alerta_sobrecarga'].sum()
+
+    df['carga_media_trabalho_amps'] = carga_media_trabalho_amps
+    df['mtbf_minutos'] = mtbf_minutos
+    df['mttr_minutos'] = mttr_minutos
+    df['perc_tempo_desligada'] = perc_desligada
+    df['perc_tempo_em_carga'] = perc_em_carga
+    df['perc_tempo_ociosa'] = perc_ociosa
+    df['confiabilidade_perc_oee'] = confiabilidade_perc
+    df['total_eventos_sobrecarga'] = total_eventos_sobrecarga
+
+    df.drop(columns=['duracao_segundos', 'estado_mtbf', 'mudou_estado', 'grupo'], inplace=True)
+    print("✓ Corrente processada com sucesso.")
     return df
 
 def tensao(df):
