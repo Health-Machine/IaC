@@ -202,6 +202,7 @@ def corrente(df):
     df['total_eventos_sobrecarga'] = total_eventos_sobrecarga
 
     df.drop(columns=['duracao_segundos', 'estado_mtbf', 'mudou_estado', 'grupo'], inplace=True)
+    
     print("✓ Corrente processada com sucesso.")
     return df
 
