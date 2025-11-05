@@ -2,6 +2,8 @@ import boto3
 import json
 import urllib.parse
 import csv
+import pandas as pd
+import numpy as np
 import io
 from datetime import datetime
 
@@ -107,22 +109,24 @@ def trusted_to_client(key):
     try:
         csv_key = key.replace('.json', '.csv')
 
+        # 1️⃣ Lê o CSV do trusted e cria o DataFrame
+        obj = s3.get_object(Bucket=TRUSTED_BUCKET, Key=csv_key)
+        df = pd.read_csv(io.BytesIO(obj['Body'].read()))
+
+        # 2️⃣ Chama todas as funções de tratamento, passando o df
         for func in [corrente, tensao, temperatura, vibracao, pressao, frequencia]:
             try:
-                func()
+                df = func(df)  # <- alteração aqui
             except Exception as e:
-                print(f"Erro na função {func.__name__} message={e}")
+                print(f"Erro na função {func.__name__}: {e}")
 
-        # Copia o CSV do bucket trusted para o bucket client
-        copy_source = {
-            'Bucket': TRUSTED_BUCKET,
-            'Key': csv_key
-        }
-
-        s3.copy_object(
-            CopySource=copy_source,
+        # 3️⃣ Salva o DataFrame final tratado no client bucket
+        out = io.StringIO()
+        df.to_csv(out, index=False)
+        s3.put_object(
             Bucket=CLIENT_BUCKET,
             Key=csv_key,
+            Body=out.getvalue().encode('utf-8'),
             ContentType='text/csv'
         )
 
@@ -130,20 +134,22 @@ def trusted_to_client(key):
     except Exception as e:
         print(f"function=trusted_to_client_error file={key} message={e}")
 
-def corrente():
-    pass
+def corrente(df):
+     
 
-def tensao():
-    pass
+    return df
 
-def temperatura():
-    pass
+def tensao(df):
+    return df
 
-def vibracao():
-    pass
+def temperatura(df):
+    return df   
 
-def pressao():
-    pass
+def vibracao(df):
+    return df   
 
-def frequencia():
-    pass
+def pressao(df):
+    return df
+
+def frequencia(df):
+    return df
