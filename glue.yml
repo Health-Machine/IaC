@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Infraestrutura IaC para Athena e Glue – tabelas iot_sensor_data e client_reclamacoes_bruto_csv"
+
+Resources:
+  # Glue Database
+  GlueDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: client_database
+        Description: "Banco de dados Glue para dados de cliente e IoT"
+
+  # Tabela IoT Sensor Data
+  IotSensorDataTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      TableInput:
+        Name: iot_sensor_data
+        Description: "Tabela de dados de sensores IoT"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: "csv"
+          skip.header.line.count: "1"
+          compressionType: "none"
+          typeOfData: "file"
+        StorageDescriptor:
+          Columns:
+            - Name: dia_captura
+              Type: string
+            - Name: hora_captura
+              Type: string
+            - Name: frequencia
+              Type: double
+          Location: "s3://client-bucket-891377383993/sensor"
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              field.delim: ","
+              escape.delim: "\\"
+              quote.delim: "\""
+
+  # Tabela Client Reclamações Bruto
+  ClientReclamacoesBrutoCsvTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      TableInput:
+        Name: client_reclamacoes_bruto_csv
+        Description: "Tabela com dados brutos de reclamações de clientes"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: "csv"
+          skip.header.line.count: "1"
+          compressionType: "none"
+          typeOfData: "file"
+        StorageDescriptor:
+          Columns:
+            - Name: id
+              Type: string
+            - Name: nome_cliente
+              Type: string
+            - Name: reclamacao
+              Type: string
+            - Name: data_reclamacao
+              Type: string
+          Location: "s3://client-bucket-891377383993/client_reclamacoes_bruto.csv"
+          InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+          OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+          SerdeInfo:
+            SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+            Parameters:
+              field.delim: ","
+              escape.delim: "\\"
+              quote.delim: "\""
+
+Outputs:
+  GlueDatabaseName:
+    Description: Nome do banco de dados Glue criado
+    Value: !Ref GlueDatabase
+
+  IotSensorDataTableName:
+    Description: Nome da tabela IoT criada
+    Value: !GetAtt IotSensorDataTable.TableInput.Name
+
+  ClientReclamacoesTableName:
+    Description: Nome da tabela de reclamações criada
+    Value: !GetAtt ClientReclamacoesBrutoCsvTable.TableInput.Name
+`
