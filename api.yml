@@ -19,18 +19,6 @@ Resources:
       Timeout: 10
       MemorySize: 128
       Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
-  GetSensorFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: get_sensor
-      Runtime: python3.11
-      Handler: get_sensor.lambda_handler
-      Code:
-        S3Bucket: !Ref SetupBucket
-        S3Key: get_sensor.zip
-      Timeout: 10
-      MemorySize: 128
-      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LabRole
 
   # Lambda Permission
   InvokePermissionGetCsv:
@@ -40,13 +28,6 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiRestHealthMachine}/*/GET/{bucket}/download-csv
-  InvokePermissionGetSensor:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !GetAtt GetSensorFunction.Arn
-      Action: lambda:InvokeFunction
-      Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiRestHealthMachine}/*/GET/sensor/{sensor_id}
 
   # Criação API
   ApiRestHealthMachine:
@@ -80,20 +61,6 @@ Resources:
       PathPart: download-csv
       RestApiId: !Ref ApiRestHealthMachine
 
-  # Resources Grafana
-  ApiResourceSensor:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId: !GetAtt ApiRestHealthMachine.RootResourceId
-      PathPart: "sensor"
-      RestApiId: !Ref ApiRestHealthMachine
-  ResourceSensorId:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId: !Ref ApiResourceSensor
-      PathPart: "{sensor_id}"
-      RestApiId: !Ref ApiRestHealthMachine
-
   # Metodos CSV
   ApiPutMethod:
     Type: AWS::ApiGateway::Method
@@ -121,42 +88,12 @@ Resources:
         method.request.header.Content-Type: true
       MethodResponses:
         - StatusCode: 200
-  ApiGetMethod:
-    Type: AWS::ApiGateway::Method
-    Properties:
-      RestApiId: !Ref ApiRestHealthMachine
-      ResourceId: !Ref ApiResourceCsv
-      HttpMethod: GET
-      AuthorizationType: NONE
-      Integration:
-        Type: AWS_PROXY
-        IntegrationHttpMethod: POST
-        Uri: !Sub
-          - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaArn}/invocations
-          - LambdaArn: !GetAtt GetLatestCsvFunction.Arn
-
-  # Metodos Grafana
-  ApiGetSensor:
-    Type: AWS::ApiGateway::Method
-    DependsOn: ResourceSensorId
-    Properties:
-      RestApiId: !Ref ApiRestHealthMachine
-      ResourceId: !Ref ResourceSensorId
-      HttpMethod: GET
-      AuthorizationType: NONE
-      Integration:
-        Type: AWS_PROXY
-        IntegrationHttpMethod: POST
-        Uri: !Sub
-          - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaArn}/invocations
-          - LambdaArn: !GetAtt GetSensorFunction.Arn
 
   ApiDeploymentHml:
     Type: AWS::ApiGateway::Deployment
     DependsOn:
       - ApiPutMethod
       - ApiGetMethod
-      - ApiGetSensor
     Properties:
       RestApiId: !Ref ApiRestHealthMachine
       StageName: hml
