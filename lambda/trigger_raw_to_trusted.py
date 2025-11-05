@@ -215,7 +215,64 @@ def vibracao(df):
     return df   
 
 def pressao(df):
-    return df
+    print("→ Iniciando junção com reclamações...")
+
+    try:
+        # 1️⃣ Nome do bucket e arquivo
+        bucket = CLIENT_BUCKET
+        key = "client_reclamacoes_bruto.csv"
+
+        # 2️⃣ Lê o CSV de reclamações do bucket client
+        response = s3.get_object(Bucket=bucket, Key=key)
+        raw_bytes = response['Body'].read()
+
+        # Detecta encoding automaticamente
+        try:
+            csv_content = raw_bytes.decode('utf-8')
+        except UnicodeDecodeError:
+            csv_content = raw_bytes.decode('latin1')
+
+        df_reclamacoes = pd.read_csv(io.StringIO(csv_content))
+
+        # 3️⃣ Tratar a coluna 'created' — deixar só a data
+        df_reclamacoes['created'] = pd.to_datetime(df_reclamacoes['created'], errors='coerce').dt.date.astype(str)
+
+        # 4️⃣ Renomear todas as colunas (coloque os novos nomes aqui)
+        df_reclamacoes.rename(columns={
+            'title': 'reclamacao_titulo',
+            'description': 'reclamacao_descricao',
+            'userstate': 'reclamacao_estado',
+            'usercity': 'reclamacao_cidade',
+            'status': 'reclamacao_status',
+            'created': 'dia_captura',   # já padroniza a data para o join
+            'url': 'reclamacao_url'
+        }, inplace=True)
+
+        print(f"✓ Colunas renomeadas: {list(df_reclamacoes.columns)}")
+
+        # 5️⃣ Fazer FULL OUTER JOIN (mantém todos os dias)
+        df_flat = pd.merge(df, df_reclamacoes, on='dia_captura', how='outer')
+
+        print(f"✓ Junção concluída. Total de registros combinados: {len(df_flat)}")
+
+        # 6️⃣ Salvar no bucket client
+        out = io.StringIO()
+        df_flat.to_csv(out, index=False)
+        s3.put_object(
+            Bucket=bucket,
+            Key='flat_table.csv',
+            Body=out.getvalue().encode('utf-8'),
+            ContentType='text/csv'
+        )
+
+        print("✓ Flat table salva no bucket client com sucesso.")
+        return df_flat
+
+    except Exception as e:
+        print(f"function=pressao_error message={e}")
+        return df
+
+
 
 def frequencia(df):
     return df
