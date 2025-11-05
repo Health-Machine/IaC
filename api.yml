@@ -93,7 +93,6 @@ Resources:
     Type: AWS::ApiGateway::Deployment
     DependsOn:
       - ApiPutMethod
-      - ApiGetMethod
     Properties:
       RestApiId: !Ref ApiRestHealthMachine
       StageName: hml
