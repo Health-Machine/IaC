@@ -8,6 +8,7 @@ import io
 from datetime import datetime
 
 s3 = boto3.client('s3')
+RAW_BUCKET = 'raw-bucket-891377383993' 
 TRUSTED_BUCKET = 'trusted-bucket-891377383993'
 CLIENT_BUCKET = 'client-bucket-891377383993'
 
@@ -18,10 +19,17 @@ def lambda_handler(event, context):
         print(f"Processando arquivo: s3://{source_bucket}/{key}")
 
         try:
+            # Processa a base ANEEL específica
+            aneel_csv_key = aneel_raw_to_trusted(s3, RAW_BUCKET, TRUSTED_BUCKET)
+            if aneel_csv_key:
+                print(f"→ Chamando função de cliente para ANEEL: {aneel_csv_key}")
             raw_to_trusted(source_bucket, key)
             trusted_to_client(key)
         except Exception as e:
             print(f"function=lambda_handler_error file={key} message={e}")
+
+    
+
 
 
 def raw_to_trusted(source_bucket, key):
@@ -134,6 +142,102 @@ def trusted_to_client(key):
     except Exception as e:
         print(f"function=trusted_to_client_error file={key} message={e}")
 
+def aneel_raw_to_trusted(s3, raw_bucket, trusted_bucket):
+
+    ANEEL_KEY = "falhas_energia_sbc.csv"
+
+    try:
+        # 1️⃣ Ler o arquivo do bucket RAW
+        response = s3.get_object(Bucket=raw_bucket, Key=ANEEL_KEY)
+        raw_bytes = response['Body'].read()
+
+        # Detectar encoding automaticamente
+        try:
+            csv_content = raw_bytes.decode('utf-8')
+        except UnicodeDecodeError:
+            csv_content = raw_bytes.decode('latin1')
+
+        df = pd.read_csv(io.StringIO(csv_content))
+        print(f"✅ CSV lido com {len(df)} linhas e {len(df.columns)} colunas")
+
+        # 2️⃣ Remover colunas irrelevantes se existirem
+        colunas_remover = [
+            '_id', 'DatGeracaoConjuntoDados', 'NumOrdemInterrupcao',
+            'IdeMotivoInterrupcao', 'numCPF', 'rank'
+        ]
+        df.drop(columns=[c for c in colunas_remover if c in df.columns], inplace=True, errors='ignore')
+
+        # 3️⃣ Limpar registros totalmente nulos
+        df.dropna(how='all', inplace=True)
+        df.replace({np.nan: None}, inplace=True)
+
+        # 4️⃣ Filtrar por Alimentador "SBC 0113"
+        if "DscAlimentadorSubestacao" in df.columns:
+            df = df[df["DscAlimentadorSubestacao"].str.contains("0113", case=False, na=False)]
+        else:
+            print("⚠️ Coluna 'DscAlimentadorSubestacao' não encontrada — nenhum filtro aplicado.")
+
+        print(f"📊 Linhas após filtro SBC 0113: {len(df)}")
+
+        if df.empty:
+            print("⚠️ Nenhum registro encontrado com Alimentador SBC 0113.")
+        
+        # 5️⃣ Separar e renomear colunas de data/hora
+        def separar_data_hora(df, coluna_original, prefixo):
+            if coluna_original not in df.columns:
+                return df
+            df[coluna_original] = pd.to_datetime(df[coluna_original], errors='coerce')
+            df[f"ANEEL_{prefixo}_Data"] = df[coluna_original].dt.strftime("%Y-%m-%d")
+            df[f"ANEEL_{prefixo}_Hora"] = df[coluna_original].dt.strftime("%H:%M")  # ⬅️ sem segundos
+            df.drop(columns=[coluna_original], inplace=True)
+            return df
+
+        df = separar_data_hora(df, "DatInicioInterrupcao", "Inicio_Interrupcao")
+        df = separar_data_hora(df, "DatFimInterrupcao", "Fim_Interrupcao")
+
+        # 6️⃣ Renomear colunas principais (com prefixo ANEEL_)
+        rename_map = {
+            'IdeConjuntoUnidadeConsumidora': 'ANEEL_ID_Conjunto_UC',
+            'DscConjuntoUnidadeConsumidora': 'ANEEL_Nome_Conjunto_UC',
+            'DscAlimentadorSubestacao': 'ANEEL_Alimentador',
+            'DscSubestacaoDistribuicao': 'ANEEL_Subestacao',
+            'DscTipoInterrupcao': 'ANEEL_Tipo_Interrupcao',
+            'DscFatoGeradorInterrupcao': 'ANEEL_Fato_Gerador',
+            'NumNivelTensao': 'ANEEL_Nivel_Tensao',
+            'NumUnidadeConsumidora': 'ANEEL_Qtd_UC_Afetadas',
+            'NumConsumidorConjunto': 'ANEEL_Qtd_Consumidores_Afetados',
+            'NumAno': 'ANEEL_Ano',
+            'NomAgenteRegulado': 'ANEEL_Agente_Regulado',
+            'SigAgente': 'ANEEL_Sigla_Agente'
+        }
+
+        df.rename(columns=rename_map, inplace=True)
+
+        # 7️⃣ Limpeza final: remover duplicatas e resetar índices
+        df.drop_duplicates(inplace=True)
+        df.reset_index(drop=True, inplace=True)
+
+        # 8️⃣ Salvar no bucket TRUSTED
+        aneel_trusted_key = ANEEL_KEY.replace('.csv', '_trusted_vw.csv')
+        csv_buffer = io.StringIO()
+        df.to_csv(csv_buffer, index=False)
+
+        s3.put_object(
+            Bucket=trusted_bucket,
+            Key=aneel_trusted_key,
+            Body=csv_buffer.getvalue().encode('utf-8'),
+            ContentType='text/csv'
+        )
+
+        print(f"✅ Arquivo tratado salvo em s3://{trusted_bucket}/{aneel_trusted_key}")
+        return aneel_trusted_key
+
+    except Exception as e:
+        print(f"❌ function=aneel_raw_to_trusted_error message={e}")
+        return None
+
+
+
 def corrente(df):
     print("→ Calculando métricas de corrente...")
 
@@ -217,7 +321,7 @@ def vibracao(df):
 
 def pressao(df):
     print("→ Iniciando junção com reclamações...")
-
+    
     try:
         # 1️⃣ Nome do bucket e arquivo
         bucket = CLIENT_BUCKET
