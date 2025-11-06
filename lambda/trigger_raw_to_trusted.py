@@ -128,6 +128,13 @@ def trusted_to_client(key):
             except Exception as e:
                 print(f"Erro na função {func.__name__}: {e}")
 
+        
+        # 3️⃣ Enriquecer com dados da ANEEL
+        try:
+            df = gerar_flat_table_aneel(df, s3)
+        except Exception as e:
+            print(f"Erro ao integrar ANEEL na flat table: {e}")
+
         # 3️⃣ Salva o DataFrame final tratado no client bucket
         out = io.StringIO()
         df.to_csv(out, index=False)
@@ -235,6 +242,47 @@ def aneel_raw_to_trusted(s3, raw_bucket, trusted_bucket):
     except Exception as e:
         print(f"❌ function=aneel_raw_to_trusted_error message={e}")
         return None
+
+def gerar_flat_table_aneel(df, s3):
+    TRUSTED_BUCKET = "trusted-bucket-891377383993"
+    ANEEL_KEY = "falhas_energia_sbc_trusted_vw.csv"
+
+    # 1) Lê ANEEL já tratada do trusted
+    obj = s3.get_object(Bucket=TRUSTED_BUCKET, Key=ANEEL_KEY)
+    aneel = pd.read_csv(io.BytesIO(obj["Body"].read()))
+
+    # 2) Cria o datetime unificado de início e fim da falha
+    aneel["ANEEL_Inicio"] = pd.to_datetime(
+        aneel["ANEEL_Inicio_Interrupcao_Data"] + " " + aneel["ANEEL_Inicio_Interrupcao_Hora"],
+        errors="coerce"
+    )
+    aneel["ANEEL_Fim"] = pd.to_datetime(
+        aneel["ANEEL_Fim_Interrupcao_Data"] + " " + aneel["ANEEL_Fim_Interrupcao_Hora"],
+        errors="coerce"
+    )
+
+    # 3) Converte data do sensor
+    df["data_captura"] = pd.to_datetime(df["data_captura"], errors="coerce")
+
+    # 4) Cria colunas ANEEL no df do sensor
+    cols = [
+        "ANEEL_Subestacao", "ANEEL_Alimentador", "ANEEL_Tipo_Interrupcao",
+        "ANEEL_Fato_Gerador", "ANEEL_Nivel_Tensao", "ANEEL_Qtd_UC_Afetadas",
+        "ANEEL_Qtd_Consumidores_Afetados", "ANEEL_Agente_Regulado"
+    ]
+    for c in cols:
+        if c not in df.columns:
+            df[c] = None
+
+    # 5) Marca falhas somente na granularidade do sensor
+    for _, row in aneel.iterrows():
+        mask = (df["data_captura"] >= row["ANEEL_Inicio"]) & (df["data_captura"] <= row["ANEEL_Fim"])
+        for c in cols:
+            if c in row:
+                df.loc[mask, c] = row[c]
+
+    print(f"✓ ANEEL integrada no df do sensor ({len(aneel)} eventos lidos)")
+    return df
 
 
 
