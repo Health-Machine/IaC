@@ -135,6 +135,42 @@ def trusted_to_client(key):
         except Exception as e:
             print(f"Erro ao integrar ANEEL na flat table: {e}")
 
+        # --- Normalização para Athena (evitar HIVE_BAD_DATA) ---
+
+        double_cols = [
+            "corrente","tensao","temperatura","vibracao","pressao","frequencia",
+            "carga_media_trabalho_amps","mtbf_minutos","mttr_minutos",
+            "perc_tempo_desligada","perc_tempo_em_carga","perc_tempo_ociosa",
+            "confiabilidade_perc_oee","ANEEL_Nivel_Tensao"
+        ]
+
+        int_cols = [
+            "total_eventos_sobrecarga",
+            "ANEEL_Qtd_UC_Afetadas",
+            "ANEEL_Qtd_Consumidores_Afetados"
+        ]
+
+        bool_cols = ["alerta_sobrecarga","falha_energia"]
+
+        # Converte para DOUBLE (valores inválidos ficam como NaN → Athena interpreta como NULL)
+        for col in double_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors="coerce")
+
+        # Converte para INT seguro (preserva NULL)
+        for col in int_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors="coerce").astype("Int64")
+
+        # Converte booleanos de forma segura
+        for col in bool_cols:
+            if col in df.columns:
+                df[col] = df[col].replace({None: False, "": False}).astype(bool)
+
+        # Garantir que strings vazias virem NULL (não "nan")
+        df = df.replace({np.nan: None})
+
+
         # 3️⃣ Salva o DataFrame final tratado no client bucket
         out = io.StringIO()
         df.to_csv(out, index=False)
@@ -247,42 +283,51 @@ def gerar_flat_table_aneel(df, s3):
     TRUSTED_BUCKET = "trusted-bucket-891377383993"
     ANEEL_KEY = "falhas_energia_sbc_trusted_vw.csv"
 
-    # 1) Lê ANEEL já tratada do trusted
+    # 1) Carrega dados ANEEL tratados
     obj = s3.get_object(Bucket=TRUSTED_BUCKET, Key=ANEEL_KEY)
     aneel = pd.read_csv(io.BytesIO(obj["Body"].read()))
 
-    # 2) Cria o datetime unificado de início e fim da falha
-    aneel["ANEEL_Inicio"] = pd.to_datetime(
+    # 2) Cria timestamps completos para intervalo da falha
+    aneel["aneel_inicio_interrupcao"] = pd.to_datetime(
         aneel["ANEEL_Inicio_Interrupcao_Data"] + " " + aneel["ANEEL_Inicio_Interrupcao_Hora"],
+        format="%Y-%m-%d %H:%M",
         errors="coerce"
     )
-    aneel["ANEEL_Fim"] = pd.to_datetime(
+    aneel["aneel_fim_interrupcao"] = pd.to_datetime(
         aneel["ANEEL_Fim_Interrupcao_Data"] + " " + aneel["ANEEL_Fim_Interrupcao_Hora"],
+        format="%Y-%m-%d %H:%M",
         errors="coerce"
     )
 
-    # 3) Converte data do sensor
-    df["data_captura"] = pd.to_datetime(df["data_captura"], errors="coerce")
+    # 3) Normaliza o timestamp do sensor
+    df["data_captura"] = pd.to_datetime(df["dia_captura"] + " " + df["hora_captura"], errors="coerce")
 
-    # 4) Cria colunas ANEEL no df do sensor
-    cols = [
+    # 4) Inicializa colunas ANEEL na flat table (garantido)
+    aneel_cols = [
         "ANEEL_Subestacao", "ANEEL_Alimentador", "ANEEL_Tipo_Interrupcao",
         "ANEEL_Fato_Gerador", "ANEEL_Nivel_Tensao", "ANEEL_Qtd_UC_Afetadas",
         "ANEEL_Qtd_Consumidores_Afetados", "ANEEL_Agente_Regulado"
     ]
-    for c in cols:
+    for c in aneel_cols:
         if c not in df.columns:
             df[c] = None
 
-    # 5) Marca falhas somente na granularidade do sensor
-    for _, row in aneel.iterrows():
-        mask = (df["data_captura"] >= row["ANEEL_Inicio"]) & (df["data_captura"] <= row["ANEEL_Fim"])
-        for c in cols:
-            if c in row:
-                df.loc[mask, c] = row[c]
+    # 5) Adiciona flags e timestamps da falha
+    df["falha_energia"] = False
+    df["aneel_inicio_interrupcao"] = None
+    df["aneel_fim_interrupcao"] = None
 
-    print(f"✓ ANEEL integrada no df do sensor ({len(aneel)} eventos lidos)")
+    # 6) Preenche para cada intervalo de falha ANEEL
+    for _, r in aneel.iterrows():
+        mask = (df["data_captura"] >= r["aneel_inicio_interrupcao"]) & (df["data_captura"] <= r["aneel_fim_interrupcao"])
+        df.loc[mask, aneel_cols] = r[aneel_cols].values
+        df.loc[mask, "falha_energia"] = True
+        df.loc[mask, "aneel_inicio_interrupcao"] = r["aneel_inicio_interrupcao"]
+        df.loc[mask, "aneel_fim_interrupcao"] = r["aneel_fim_interrupcao"]
+
+    print(f"✓ ANEEL integrada ao dataset na granularidade do sensor ({len(aneel)} falhas aplicadas)")
     return df
+
 
 
 
